@@ -23,7 +23,7 @@ class SignupProcess extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 20,bottom: 20),
+                padding: const EdgeInsets.only(top:60,bottom: 20),
                 child: SizedBox(
                     width: 45,
                     child: LeadingButton(onPress: () {

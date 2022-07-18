@@ -11,19 +11,21 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: Container(
-        decoration:const BoxDecoration(
-          color: Color(0xFFFFFFFF),
-          image: DecorationImage(
-            image: AssetImage('assets/images/Pattern.png')
-          )
-        ),
-        child:  Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:const [
-              Logo()
-            ],
+      body: SafeArea(
+        child: Container(
+          decoration:const BoxDecoration(
+            color: Color(0xFFFFFFFF),
+            image: DecorationImage(
+              image: AssetImage('assets/images/Pattern.png')
+            )
+          ),
+          child:  Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:const [
+                Logo()
+              ],
+            ),
           ),
         ),
       ),

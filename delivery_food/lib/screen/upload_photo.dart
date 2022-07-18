@@ -10,9 +10,7 @@ class UploadPhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: true,
-      body: SafeArea(
-          child: SignupProcess(
+       body: SignupProcess(
               title: 'Upload Your Photo Profile',
               subtile:
                   'This data will be displayed in your account profile for security',
@@ -25,7 +23,7 @@ class UploadPhoto extends StatelessWidget {
                   UploadContent(lable: 'Take Photo', onPress:(){}, assetImage:'assets/icons/camera.png')
                 ],
               ) )
-              ),
+              
     );
   }
 }
