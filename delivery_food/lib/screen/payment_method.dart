@@ -1,10 +1,7 @@
 import 'package:delivery_food/components/payment_content.dart';
-import 'package:delivery_food/components/reusable_card.dart';
-import 'package:delivery_food/constans/app_stype.dart';
+
 import 'package:delivery_food/screen/upload_photo.dart';
-import 'package:delivery_food/widget/cta_button.dart';
-import 'package:delivery_food/widget/leading_button.dart';
-import 'package:delivery_food/widget/pattern.dart';
+
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 

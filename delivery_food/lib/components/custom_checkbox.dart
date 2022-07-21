@@ -14,18 +14,16 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
    bool _isSelected = false;
   @override
   Widget build(BuildContext context) {
-   
     return GestureDetector (
       onTap: (){
         setState(() {
           _isSelected = !_isSelected;
         });
       },
-      child: Container(
+      child: Container(     
         decoration: BoxDecoration(
           gradient: appLinearColor(),
-          shape: BoxShape.circle ,
-          
+          shape: BoxShape.circle ,        
         ),
         width: 24,
         height: 24,

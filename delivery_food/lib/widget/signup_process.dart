@@ -16,45 +16,47 @@ class SignupProcess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Pattern(
-          child: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top:60,bottom: 20),
-                child: SizedBox(
-                    width: 45,
-                    child: LeadingButton(onPress: () {
-                      Navigator.pop(context);
-                    })),
-              ),
-               Text(
-                title,
-                style: kTitleStyle,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                subtile,
-                style: kTextSubTitle,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              child,           
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: CTAButton(onTap:onPress, label: buttontext),
+    return SafeArea(
+      child: Pattern(
+            child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: SizedBox(
+                      width: 45,
+                      child: LeadingButton(onPress: () {
+                        Navigator.pop(context);
+                      })),
+                ),
+                 Text(
+                  title,
+                  style: kTitleStyle,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  subtile,
+                  style: kTextSubTitle,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                child,           
+              ],
             ),
-          )
-        ],
-      ));
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: CTAButton(onTap:onPress, label: buttontext),
+              ),
+            )
+          ],
+        )),
+    );
   }
 }

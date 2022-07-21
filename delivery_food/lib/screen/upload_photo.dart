@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:delivery_food/components/buildimage.dart';
 import 'package:delivery_food/components/upload_content.dart';
+import 'package:delivery_food/screen/set_location.dart';
 import 'package:delivery_food/widget/signup_process.dart';
 
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
             subtile:
                 'This data will be displayed in your account profile for security',
             buttontext: 'Next',
-            onPress: () {},
+            onPress: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> const SetLocation() ));},
             child:image != null ? BuildImage(image: image!, onPress: (){setState(() {
               image = null;
             });} ): Column(

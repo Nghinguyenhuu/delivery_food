@@ -1,15 +1,13 @@
 import 'package:delivery_food/components/form_login.dart';
-import 'package:delivery_food/components/input_content.dart';
+
 import 'package:delivery_food/components/login_with.dart';
-import 'package:delivery_food/components/reusable_card.dart';
-import 'package:delivery_food/constans/app_colors.dart';
-import 'package:delivery_food/constans/app_stype.dart';
+
 import 'package:delivery_food/screen/signup_screen.dart';
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
