@@ -11,13 +11,22 @@ class InputContent extends StatefulWidget {
     required this.label,
     this.isPassword,
   }) : super(key: key);
-
   @override
   State<InputContent> createState() => _InputContentState();
+
+  
 }
 
 class _InputContentState extends State<InputContent> {
-  bool selected = false;
+
+  bool selected = true;
+
+  @override
+  void initState() {
+    selected = true;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isPass = widget.isPassword ?? false;

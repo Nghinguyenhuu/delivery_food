@@ -1,5 +1,4 @@
 
-import 'package:delivery_food/screen/forgot_password.dart';
 import 'package:delivery_food/screen/onboarding.dart';
 
 
