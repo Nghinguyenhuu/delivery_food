@@ -1,5 +1,6 @@
 import 'package:delivery_food/components/input_content.dart';
 import 'package:delivery_food/components/reusable_card.dart';
+import 'package:delivery_food/screen/reset_password_success.dart';
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,9 @@ class _ResetPasswordState extends State<ResetPassword> {
           subtile:
               'Select which contact details should we use to reset your password',
           buttontext: 'Next',
-          onPress: () {},
+          onPress: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> const ResetPWSuccess()));
+          },
           child: Form(
               child: Column(
             children:const [

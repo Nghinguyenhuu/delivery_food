@@ -9,7 +9,7 @@ class SignupSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body:Pattern(child: SuccessNotification(label: 'Your Profile Is Ready To Use'),
+      body:Pattern(child: SuccessNotification(label: 'Your Profile Is Ready To Use',buttontext: 'Try Oder',),
     )) ;
   }
 }

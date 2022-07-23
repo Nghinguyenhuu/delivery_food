@@ -32,7 +32,7 @@ class ForgotPassword extends StatelessWidget {
                     cardChild: ListTile(
                       leading: Image.asset('assets/images/Email.png'),
                       title: Text('Via sms:',style: kHintInputStyle,),
-                      subtitle: Text(changeObscureSMS(sms)),
+                      subtitle: Text(changeObscureSMS(sms),style: kSubTitleStyle,),
                     ),
                   ),
                   const SizedBox(height: 20,),
@@ -40,7 +40,7 @@ class ForgotPassword extends StatelessWidget {
                     cardChild: ListTile(
                       leading: Image.asset('assets/images/Message.png'),
                       title: Text('Via sms:',style: kHintInputStyle,),
-                      subtitle: Text(changeObscureEmail(email)),
+                      subtitle: Text(changeObscureEmail(email),style: kSubTitleStyle,),
                     ),
                   ),
                 ],
@@ -51,6 +51,10 @@ class ForgotPassword extends StatelessWidget {
   String changeObscureSMS(String sms){
     String obssms = '';
     for (int i = 0; i < sms.length; i++) {
+
+      if( i % 4 == 0 ) {
+        obssms = '$obssms ';
+      }
       if (i < sms.length - 4) {
         obssms='$obssms•';
       }else{
@@ -65,6 +69,7 @@ class ForgotPassword extends StatelessWidget {
     for (var i = 0; i < email.length; i++) {
       if(email[i] == '@'){
         isObscure = false;
+        obsemail = '$obsemail ';
       }
       if(isObscure){
         obsemail = '$obsemail•';
