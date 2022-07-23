@@ -1,12 +1,11 @@
-import 'dart:math';
+
 
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
-import 'package:delivery_food/screen/forgot_password.dart';
+
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class SuccessNotification extends StatefulWidget {

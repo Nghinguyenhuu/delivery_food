@@ -1,5 +1,8 @@
 
+
+
 import 'package:delivery_food/components/reusable_card.dart';
+import 'package:delivery_food/screen/reset_password.dart';
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +22,9 @@ class ForgotPassword extends StatelessWidget {
             subtile:
                 'Select which contact details should we use to reset your password',
             buttontext: 'Next',
-            onPress: () {},
+            onPress: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const ResetPassword()));
+            },
             child: 
               Column(
                 children: [
@@ -56,16 +61,17 @@ class ForgotPassword extends StatelessWidget {
   }
   String changeObscureEmail(String email){
     String obsemail = '';
-    int i = 0 ;
-    while(
-      email[i] != '@' 
-    ){
-      obsemail = '$obsemail•';
-      i++;
-    }
-    while(email[i] != ''){
-      obsemail = obsemail+email[i];
-      i++;
+    bool isObscure = true;
+    for (var i = 0; i < email.length; i++) {
+      if(email[i] == '@'){
+        isObscure = false;
+      }
+      if(isObscure){
+        obsemail = '$obsemail•';
+
+      }else{
+        obsemail = obsemail + email[i];
+      }
     }
     return obsemail;
   }

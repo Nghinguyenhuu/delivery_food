@@ -17,6 +17,7 @@ class InputContent extends StatefulWidget {
 }
 
 class _InputContentState extends State<InputContent> {
+  bool selected = false ;
   @override
   Widget build(BuildContext context) {
     bool isPass = widget.isPassword ?? false;
@@ -31,17 +32,17 @@ class _InputContentState extends State<InputContent> {
               hintStyle: kHintInputStyle,
               border: InputBorder.none,
             ),
-            obscureText: isPass,
+            obscureText: selected,
           ),
-          Align(alignment: Alignment.centerRight, child: iconeye(isPass)),
+          Align(alignment: Alignment.centerRight, child:isPass == true ? IconButton(onPressed: (){
+            setState(() {
+              selected = !selected;
+            });
+          }, icon: Image.asset(selected ? 'assets/icons/showout.png' : 'assets/icons/showup.png')): null ),
         ],
       ),
     );
   }
 }
 
-Widget? iconeye(bool isPass) {
-  return isPass == true
-      ? IconButton(onPressed: () {}, icon: Image.asset('assets/icons/Show.png'))
-      : null;
-}
+
