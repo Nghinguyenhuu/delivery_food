@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:delivery_food/components/buildimage.dart';
 import 'package:delivery_food/components/upload_content.dart';
-import 'package:delivery_food/screen/set_location.dart';
+import 'package:delivery_food/re_auth/screen/set_location.dart';
+
 import 'package:delivery_food/widget/signup_process.dart';
 
 import 'package:flutter/material.dart';

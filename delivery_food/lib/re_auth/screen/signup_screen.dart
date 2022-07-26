@@ -4,8 +4,8 @@ import 'package:delivery_food/components/input_content.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
+import 'package:delivery_food/re_auth/screen/fill_infor.dart';
 
-import 'package:delivery_food/screen/fill_infor.dart';
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';

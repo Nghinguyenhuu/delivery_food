@@ -1,10 +1,14 @@
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
-import 'package:delivery_food/screen/reset_password.dart';
+
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 
-import '../constans/app_stype.dart';
+import '../../constans/app_stype.dart';
+import 'reset_password.dart';
+
+
+
 
 class ForgotPassword extends StatelessWidget {
   final String sms;

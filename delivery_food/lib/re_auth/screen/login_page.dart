@@ -2,11 +2,15 @@ import 'package:delivery_food/components/form_login.dart';
 
 import 'package:delivery_food/components/login_with.dart';
 
-import 'package:delivery_food/screen/signup_screen.dart';
+
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
+
+import 'signup_screen.dart';
+
+
 
 
 class LoginPage extends StatefulWidget {

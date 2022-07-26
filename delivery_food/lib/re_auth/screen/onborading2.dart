@@ -1,9 +1,11 @@
 
 import 'package:delivery_food/constans/app_colors.dart';
-import 'package:delivery_food/screen/login_page.dart';
+import 'package:delivery_food/re_auth/screen/login_page.dart';
+
 import 'package:flutter/material.dart';
 
-import '../widget/cta_button.dart';
+import '../../widget/cta_button.dart';
+
 
 class OnBoardingScreen2 extends StatelessWidget {
   const OnBoardingScreen2({Key? key}) : super(key: key);

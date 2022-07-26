@@ -1,10 +1,11 @@
 
 import 'package:delivery_food/constans/app_colors.dart';
+import 'package:delivery_food/widget/cta_button.dart';
 
-import 'package:delivery_food/screen/onborading2.dart';
 import 'package:flutter/material.dart';
 
-import '../widget/cta_button.dart';
+import 'onborading2.dart';
+
 
 
 

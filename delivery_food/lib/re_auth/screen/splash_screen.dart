@@ -1,7 +1,8 @@
 
+import 'package:delivery_food/widget/logo.dart';
 import 'package:flutter/material.dart';
 
-import '../widget/logo.dart';
+
 
 
 class SplashScreen extends StatelessWidget {
