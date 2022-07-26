@@ -17,12 +17,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
 
-  final bottomItem = [
-    const HomeBottomItem(
-      label: 'Home',
-      assetImage: 'assets/icons/Home.png',
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +30,36 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: BottomNavigationBar(currentIndex: currentIndex, items: [
-            BottomNavigationBarItem(
-                icon: bottomItem[currentIndex], label: 'Home'),
-            BottomNavigationBarItem(
-                icon: bottomItem[currentIndex], label: 'Profile'),
-          ]),
+          child: BottomNavigationBar(
+              currentIndex: currentIndex,
+              onTap: (index) => setState(() {
+                    currentIndex = index;
+                  }),
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              iconSize: 20,
+              items: [
+                BottomNavigationBarItem(
+                    icon: Image.asset('assets/icons/Home.png'),
+                    activeIcon: const HomeBottomItem(
+                        assetImage: 'assets/icons/Home.png', label: 'Home'),
+                    label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: Image.asset('assets/icons/Profile.png'),
+                    activeIcon: const HomeBottomItem(
+                        assetImage: 'assets/icons/Profile.png', label: 'Profile'),
+                    label: 'Profile'),
+                BottomNavigationBarItem(
+                    icon: Image.asset('assets/icons/Buy.png'),
+                    activeIcon: const HomeBottomItem(
+                        assetImage: 'assets/icons/Buy.png', label: 'Buy'),
+                    label: 'Shop'),
+                BottomNavigationBarItem(
+                    icon: Image.asset('assets/icons/Chat.png'),
+                    activeIcon: const HomeBottomItem(
+                        assetImage: 'assets/icons/Chat.png', label: 'Chat'),
+                    label: 'Message'),
+              ]),
         ),
       );
 }
