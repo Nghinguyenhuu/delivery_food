@@ -26,13 +26,16 @@ const kMidiumStyle = TextStyle(
 const kHeadingStyle = TextStyle(
     fontFamily: 'BentonSan Bold', fontSize: 25, fontWeight: FontWeight.bold);
 const kTitleStyle = TextStyle(
-    fontFamily: 'BentonSan Bold', fontSize: 30, fontWeight: FontWeight.bold);
+    fontFamily: 'BentonSan Bold',
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+    color: AppColors.appPrimarycolor);
 const kTextSubTitle = TextStyle(
     color: AppColors.appPrimarycolor,
     fontFamily: 'BentonSan Bold',
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    letterSpacing: 0.5);        
+    letterSpacing: 0.5);
 
 const kSubTitleStyle = TextStyle(
     color: AppColors.appPrimarycolor,

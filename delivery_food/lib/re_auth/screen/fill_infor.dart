@@ -1,7 +1,5 @@
 import 'package:delivery_food/components/form_fill.dart';
 import 'package:delivery_food/re_auth/screen/payment_method.dart';
-
-
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 
