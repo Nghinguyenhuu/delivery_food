@@ -43,3 +43,10 @@ const kSubTitleStyle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
     letterSpacing: 0.5);
+const kHomeSubjectStyle = TextStyle(
+  color: AppColors.appPrimarycolor,
+  fontFamily: 'BentonSan Bold',
+  fontSize: 17,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 0.5
+);
