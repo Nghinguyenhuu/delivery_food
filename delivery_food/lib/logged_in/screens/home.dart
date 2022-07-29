@@ -1,3 +1,5 @@
+import 'package:delivery_food/data/data_source/home_data.dart';
+import 'package:delivery_food/data/model/restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -9,6 +11,8 @@ import '../../constans/app_colors.dart';
 import '../../constans/app_stype.dart';
 import 'package:delivery_food/widget/pattern.dart';
 
+import '../../data/model/menu.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -18,7 +22,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentindex = 0;
-
+  List<Restaurant> restaurants = allRestaurant;
+  List<Menu> menus = allMenu;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,6 +77,9 @@ class _HomeState extends State<Home> {
                           ),
                           Expanded(
                             child: TextFormField(
+                              onChanged: ((value) {
+                                return searchContent(value) ;
+                              }),
                               decoration: InputDecoration(
                                   hintText: 'What do you want to order?',
                                   hintStyle: TextStyle(
@@ -105,8 +113,20 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void searchContent(String Query){
-    
+  void searchContent(String query){
+    final input = query.toLowerCase();
+    final suggestRestaurant = allRestaurant.where((restaurant){
+      final restaurantName = restaurant.name.toLowerCase();
+      return restaurantName.contains(input);
+    }).toList();
+    final suggestMenu = allMenu.where((element){
+      final menuTitle = element.name.toLowerCase();
+      return menuTitle.contains(input) ;
+    }).toList();
+    setState(() {
+      restaurants = suggestRestaurant;
+      menus = suggestMenu;
+    });
   }
 
   buildViewmoreMenu() {
@@ -179,19 +199,19 @@ class _HomeState extends State<Home> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/Logo.png'),
-                  const Text(
-                    'Vegan Resto',
+                  Image.asset(restaurants[index].assetImage),
+                  Text(
+                    restaurants[index].name,
                     style: kHomeSubjectStyle,
                   ),
                   Text(
-                    '12 Mins',
+                    '${restaurants[index].deliveryTime} mins',
                     style: kHintInputStyle,
                   )
                 ],
               ),
             ));
-          }, childCount: 2),
+          }, childCount: restaurants.length),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.8,

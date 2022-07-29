@@ -1,8 +1,9 @@
 class Restaurant {
-  int id;
-  String assetImage;
-  int deliveryTime;
+  final int id;
+  final String name;
+  final String assetImage;
+  final int deliveryTime;
 
-  Restaurant(
-      {required this.assetImage, required this.deliveryTime, required this.id});
+  const Restaurant(
+      {required this.assetImage, required this.deliveryTime, required this.id,required this.name});
 }
