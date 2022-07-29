@@ -105,6 +105,10 @@ class _HomeState extends State<Home> {
     );
   }
 
+  void searchContent(String Query){
+    
+  }
+
   buildViewmoreMenu() {
     return MultiSliver(children: [
       SliverToBoxAdapter(
@@ -196,6 +200,8 @@ class _HomeState extends State<Home> {
     ]);
   }
 
+  
+  
   buildHomeView() {
     return MultiSliver(children: [
       SliverToBoxAdapter(
