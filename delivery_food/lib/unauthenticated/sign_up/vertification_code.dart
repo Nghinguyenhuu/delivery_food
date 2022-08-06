@@ -3,7 +3,7 @@ import 'package:delivery_food/components/vertify_content.dart';
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 
-import 'forgot_password.dart';
+import '../sign_in/forgot_password.dart';
 
 class VertificationCode extends StatelessWidget {
   const VertificationCode({Key? key}) : super(key: key);

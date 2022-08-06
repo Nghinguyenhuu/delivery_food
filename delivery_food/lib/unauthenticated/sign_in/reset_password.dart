@@ -1,9 +1,11 @@
 import 'package:delivery_food/components/input_content.dart';
 import 'package:delivery_food/components/reusable_card.dart';
-import 'package:delivery_food/re_auth/screen/reset_password_success.dart';
+
 
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
+
+import 'reset_password_success.dart';
 
 
 class ResetPassword extends StatefulWidget {

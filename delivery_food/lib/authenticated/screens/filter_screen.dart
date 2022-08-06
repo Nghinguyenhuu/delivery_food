@@ -3,8 +3,7 @@ import 'package:delivery_food/components/reusable_home_card.dart';
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../components/reusable_card.dart';

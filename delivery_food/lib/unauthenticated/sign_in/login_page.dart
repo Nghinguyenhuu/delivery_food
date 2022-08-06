@@ -1,13 +1,15 @@
 import 'package:delivery_food/components/form_login.dart';
 
 import 'package:delivery_food/components/login_with.dart';
-import 'package:delivery_food/logged_in/screens/home_screen.dart';
+
 
 
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
+
+import '../../authenticated/screens/home_screen.dart';
 
 
 
@@ -25,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: false,
         body: Pattern(
           child: Stack(children: [
             Column(

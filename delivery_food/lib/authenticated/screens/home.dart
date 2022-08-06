@@ -1,6 +1,6 @@
+import 'package:delivery_food/authenticated/screens/filter_screen.dart';
 import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/data/model/restaurant.dart';
-import 'package:delivery_food/logged_in/screens/filter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';

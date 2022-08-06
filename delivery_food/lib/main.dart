@@ -1,8 +1,7 @@
 
-
-
-import 'package:delivery_food/re_auth/screen/onboarding.dart';
 import 'package:flutter/material.dart';
+
+import 'unauthenticated/onboarding/onboarding.dart';
 
 void main() {
   runApp(const MyApp());

@@ -2,13 +2,15 @@ import 'dart:io';
 
 import 'package:delivery_food/components/buildimage.dart';
 import 'package:delivery_food/components/upload_content.dart';
-import 'package:delivery_food/re_auth/screen/set_location.dart';
+
 
 import 'package:delivery_food/widget/signup_process.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'set_location.dart';
 
 class UploadPhoto extends StatefulWidget {
   const UploadPhoto({Key? key}) : super(key: key);

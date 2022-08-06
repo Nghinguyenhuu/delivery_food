@@ -1,9 +1,11 @@
 import 'package:delivery_food/components/location.dart';
-import 'package:delivery_food/re_auth/screen/vertification_code.dart';
+
 
 
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
+
+import 'vertification_code.dart';
 
 
 class SetLocation extends StatefulWidget {

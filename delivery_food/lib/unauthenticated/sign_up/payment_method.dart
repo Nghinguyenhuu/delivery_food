@@ -1,10 +1,12 @@
 import 'package:delivery_food/components/payment_content.dart';
-import 'package:delivery_food/re_auth/screen/upload_photo.dart';
+
 
 
 
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
+
+import 'upload_photo.dart';
 
 class PaymentMethod extends StatelessWidget {
   const PaymentMethod({Key? key}) : super(key: key);

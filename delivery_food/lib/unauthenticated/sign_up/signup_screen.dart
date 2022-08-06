@@ -1,16 +1,21 @@
+
+
 import 'package:delivery_food/components/custom_checkbox.dart';
 import 'package:delivery_food/components/input_content.dart';
 
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
-import 'package:delivery_food/re_auth/screen/fill_infor.dart';
+import 'package:delivery_food/data/data_source/user_data.dart';
+import 'package:delivery_food/data/model/user.dart';
+import 'package:delivery_food/unauthenticated/sign_in/login_page.dart';
 
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -20,6 +25,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpScreen> {
+  final usercontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +55,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                   children: [
                     ReusableCard(
                         cardChild: InputContent(
+                      myController: usercontroller,
                       icon: Image.asset(
                         'assets/icons/Profile.png',
                         width: 24,
@@ -55,6 +64,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     )),
                     ReusableCard(
                         cardChild: InputContent(
+                      myController: emailcontroller,
                       icon: Image.asset(
                         'assets/icons/Message.png',
                         width: 24,
@@ -63,6 +73,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     )),
                     ReusableCard(
                         cardChild: InputContent(
+                      myController: passwordcontroller,
                       icon: Image.asset(
                         'assets/icons/Lock.png',
                         width: 24,
@@ -110,16 +121,35 @@ class _SignUpPageState extends State<SignUpScreen> {
                       children: [
                         ReusableCard(
                             cardChild: CTAButton(
-                                onTap: () {  Navigator.push(context,MaterialPageRoute(builder: (context)=> const FillInfor())); }, label: 'Create Account')),
+                                onTap: () {
+                                  buildCreateAccount(
+                                      usercontroller.text,
+                                      passwordcontroller.text,
+                                      emailcontroller.text)
+                                      ? Navigator.push(context,MaterialPageRoute(builder: (context)=> const LoginPage()))
+                                      : showDialog(context: context, builder:(context) =>const AlertDialog(
+                                        content: Text('Username, Password or Email is empty'),
+                                      ));              
+                                },
+                                label: 'Create Account')),
                         const SizedBox(
                           height: 14,
                         ),
-                        GradientText('Already have an account',
-                            style: kMidiumStyle,
-                            colors: const [
-                              AppColors.appLinerColorStart,
-                              AppColors.appLinerColorEnd
-                            ]),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginPage(),
+                                ));
+                          },
+                          child: GradientText('Already have an account',
+                              style: kMidiumStyle,
+                              colors: const [
+                                AppColors.appLinerColorStart,
+                                AppColors.appLinerColorEnd
+                              ]),
+                        ),
                       ],
                     ),
                   ),
@@ -131,4 +161,14 @@ class _SignUpPageState extends State<SignUpScreen> {
       ),
     );
   }
+
+  bool buildCreateAccount(String pass, String username, String email) {
+    if(pass != "" && username != "" && email!=""){
+      User user = User(password: pass, username: username, email: email);
+
+      UserData().addUser(user);
+      return true;
+    }
+    return false;
+}
 }
