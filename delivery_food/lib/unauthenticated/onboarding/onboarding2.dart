@@ -1,13 +1,9 @@
 
 import 'package:delivery_food/constans/app_colors.dart';
+import 'package:delivery_food/routes/route.dart';
 import 'package:delivery_food/unauthenticated/sign_up/signup_screen.dart';
-
-
 import 'package:flutter/material.dart';
-
 import '../../widget/cta_button.dart';
-
-
 
 class OnBoardingScreen2 extends StatelessWidget {
   const OnBoardingScreen2({Key? key}) : super(key: key);
@@ -65,7 +61,7 @@ class OnBoardingScreen2 extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 40),
                 child: CTAButton(onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>const SignUpScreen() ));
+                  Navigator.pushNamed(context, RouteGenerator.signup);
                 }, label: 'Next'),
               ),
             )

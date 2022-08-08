@@ -177,7 +177,8 @@ class _HomeState extends State<Home> {
   }
 
   buildViewMoreRestaurant() {
-    return MultiSliver(children: [
+    return MultiSliver(
+      children: [
       SliverToBoxAdapter(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
@@ -223,8 +224,6 @@ class _HomeState extends State<Home> {
     ]);
   }
 
-  
-  
   buildHomeView() {
     return MultiSliver(children: [
       SliverToBoxAdapter(

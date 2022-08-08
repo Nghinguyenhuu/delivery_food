@@ -1,10 +1,12 @@
 
 import 'package:delivery_food/constans/app_colors.dart';
+import 'package:delivery_food/routes/fade_route.dart';
+import 'package:delivery_food/routes/route.dart';
 import 'package:delivery_food/widget/cta_button.dart';
 
 import 'package:flutter/material.dart';
 
-import 'onborading2.dart';
+import 'onboarding2.dart';
 
 
 
@@ -64,8 +66,9 @@ class OnBoardingScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 40),
               child: CTAButton(onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>const  OnBoardingScreen2() ));
-              }, label: 'Next'),
+                Navigator.pushNamed(context,RouteGenerator.onborading2);
+              }  
+              , label: 'Next'),
             ),
           )
           ],

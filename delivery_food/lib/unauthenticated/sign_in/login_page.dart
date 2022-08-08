@@ -1,6 +1,7 @@
 import 'package:delivery_food/components/form_login.dart';
 
 import 'package:delivery_food/components/login_with.dart';
+import 'package:delivery_food/routes/route.dart';
 
 
 
@@ -28,33 +29,32 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: false,
-        body: Pattern(
-          child: Stack(children: [
-            Column(
-              children: const [
-                Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Logo(),
-                ),
-                FormLogin(),
-                ContinueWith(),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: CTAButton(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreen()));
-                    },
-                    label: 'Login'),
+        body: SafeArea(
+          child: Pattern(
+            child: Stack(children: [
+              Column(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Logo(),
+                  ),
+                  FormLogin(),
+                  ContinueWith(),
+                ],
               ),
-            )
-          ]),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: CTAButton(
+                      onTap: () {
+                        Navigator.pushNamed(context,RouteGenerator.home );
+                      },
+                      label: 'Login'),
+                ),
+              )
+            ]),
+          ),
         ));
   }
 }
