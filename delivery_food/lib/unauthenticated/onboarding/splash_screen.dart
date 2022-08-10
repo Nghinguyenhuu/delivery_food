@@ -1,7 +1,5 @@
-import 'package:delivery_food/routes/fade_route.dart';
-import 'package:delivery_food/routes/route.dart';
-import 'package:delivery_food/unauthenticated/onboarding/onboarding.dart';
 
+import 'package:delivery_food/routes/route.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:flutter/material.dart';
 

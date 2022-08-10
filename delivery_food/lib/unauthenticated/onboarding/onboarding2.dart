@@ -1,7 +1,6 @@
 
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/routes/route.dart';
-import 'package:delivery_food/unauthenticated/sign_up/signup_screen.dart';
 import 'package:flutter/material.dart';
 import '../../widget/cta_button.dart';
 

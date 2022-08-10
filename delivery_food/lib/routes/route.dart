@@ -1,6 +1,5 @@
-
-
 import 'package:delivery_food/authenticated/screens/home_screen.dart';
+import 'package:delivery_food/data/model/user.dart';
 import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/unauthenticated/onboarding/onboarding.dart';
 import 'package:delivery_food/unauthenticated/onboarding/onboarding2.dart';
@@ -14,19 +13,31 @@ class RouteGenerator {
   const RouteGenerator._();
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    final args = settings.arguments;
     switch (settings.name) {
       case splash:
-        return MaterialPageRoute(builder: (context)=> const SplashScreen());
+        return MaterialPageRoute(builder: (context) => const SplashScreen());
       case onborading:
-      return CustomPageRoute(child: const OnBoardingScreen(),settings: settings);
+        return CustomPageRoute(
+            child: const OnBoardingScreen(), settings: settings);
       case onborading2:
-      return CustomPageRoute(child: const OnBoardingScreen2(),settings: settings);  
+        return CustomPageRoute(
+            child: const OnBoardingScreen2(), settings: settings);
       case signup:
-      return CustomPageRoute(child: const SignUpScreen(),settings: settings);
+        return CustomPageRoute(child: const SignUpScreen(), settings: settings);
       case signin:
-      return CustomPageRoute(child: const LoginPage(),settings: settings,direction: AxisDirection.down);
+        return CustomPageRoute(
+            child: const LoginPage(),
+            settings: settings,
+            direction: AxisDirection.down);
       case home:
-      return CustomPageRoute(child: const HomeScreen(),settings: settings,direction: AxisDirection.down);
+        User user = args as User;
+        return CustomPageRoute(
+            child: HomeScreen(
+              users: user,
+            ),
+            settings: settings,
+            direction: AxisDirection.down);
       default:
         throw const RouteException("Route not found");
     }

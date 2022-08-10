@@ -1,5 +1,5 @@
 import 'package:delivery_food/routes/route.dart';
-import 'package:delivery_food/unauthenticated/onboarding/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {

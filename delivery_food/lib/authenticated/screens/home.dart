@@ -1,6 +1,7 @@
 import 'package:delivery_food/authenticated/screens/filter_screen.dart';
 import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/data/model/restaurant.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -15,7 +16,8 @@ import 'package:delivery_food/widget/pattern.dart';
 import '../../data/model/menu.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+
+  const Home({Key? key,}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();

@@ -1,15 +1,10 @@
 
 import 'package:delivery_food/constans/app_colors.dart';
-import 'package:delivery_food/routes/fade_route.dart';
+
 import 'package:delivery_food/routes/route.dart';
 import 'package:delivery_food/widget/cta_button.dart';
 
 import 'package:flutter/material.dart';
-
-import 'onboarding2.dart';
-
-
-
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);

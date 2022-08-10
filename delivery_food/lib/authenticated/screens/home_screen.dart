@@ -2,6 +2,7 @@ import 'package:delivery_food/authenticated/screens/chat.dart';
 import 'package:delivery_food/authenticated/screens/home.dart';
 import 'package:delivery_food/authenticated/screens/shop.dart';
 import 'package:delivery_food/components/home_bottom_item.dart';
+import 'package:delivery_food/data/model/user.dart';
 
 
 import 'package:flutter/material.dart';
@@ -10,8 +11,8 @@ import 'profile.dart';
 
 
 class HomeScreen extends StatefulWidget {
-
-  const HomeScreen({Key? key,}) : super(key: key);
+    final User users;
+  const HomeScreen({Key? key, required this.users,}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
