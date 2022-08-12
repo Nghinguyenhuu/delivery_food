@@ -7,6 +7,7 @@ class AppColors {
   static const Color lightorange = Color(0xFFFEF6ED);
   static const Color lightgrey = Color(0xFFF6F6F6);
   static const Color lightgreen = Color(0xFFEAFAF2);
+  static const Color lightpink = Color(0xFFFEF6ED);
 
   static const Color appPrimarycolor = Color(0xFF09051C);
   static const Color appLinerColorStart = Color(0xFF53E88B);

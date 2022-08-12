@@ -34,6 +34,7 @@ const kTextSubTitle = TextStyle(
     color: AppColors.appPrimarycolor,
     fontFamily: 'BentonSan Bold',
     fontSize: 14,
+    height: 1.75,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.5);
 

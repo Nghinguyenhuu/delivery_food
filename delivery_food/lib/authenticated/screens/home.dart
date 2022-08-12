@@ -1,6 +1,8 @@
+import 'package:delivery_food/authenticated/details/restaurant_detail.dart';
 import 'package:delivery_food/authenticated/screens/filter_screen.dart';
 import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/data/model/restaurant.dart';
+import 'package:delivery_food/routes/fade_route.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,8 +18,9 @@ import 'package:delivery_food/widget/pattern.dart';
 import '../../data/model/menu.dart';
 
 class Home extends StatefulWidget {
-
-  const Home({Key? key,}) : super(key: key);
+  const Home({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -81,7 +84,7 @@ class _HomeState extends State<Home> {
                           Expanded(
                             child: TextFormField(
                               onChanged: ((value) {
-                                return searchContent(value) ;
+                                return searchContent(value);
                               }),
                               decoration: InputDecoration(
                                   hintText: 'What do you want to order?',
@@ -101,7 +104,11 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.all(5.0),
                       child: IconButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: ((context) => const FilterScreen())));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) =>
+                                        const FilterScreen())));
                           },
                           icon: Image.asset('assets/icons/Filter.png')),
                     ))
@@ -118,15 +125,15 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void searchContent(String query){
+  void searchContent(String query) {
     final input = query.toLowerCase();
-    final suggestRestaurant = allRestaurant.where((restaurant){
+    final suggestRestaurant = allRestaurant.where((restaurant) {
       final restaurantName = restaurant.name.toLowerCase();
       return restaurantName.contains(input);
     }).toList();
-    final suggestMenu = allMenu.where((element){
+    final suggestMenu = allMenu.where((element) {
       final menuTitle = element.name.toLowerCase();
-      return menuTitle.contains(input) ;
+      return menuTitle.contains(input);
     }).toList();
     setState(() {
       restaurants = suggestRestaurant;
@@ -179,8 +186,7 @@ class _HomeState extends State<Home> {
   }
 
   buildViewMoreRestaurant() {
-    return MultiSliver(
-      children: [
+    return MultiSliver(children: [
       SliverToBoxAdapter(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
@@ -201,7 +207,7 @@ class _HomeState extends State<Home> {
               SliverChildBuilderDelegate((BuildContext context, int index) {
             return ReusableCard(
                 cardChild: SizedBox(
-              height: 300,
+              height: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -317,21 +323,27 @@ class _HomeState extends State<Home> {
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {
             return ReusableCard(
-                cardChild: SizedBox(
-              height: 300,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/Logo.png'),
-                  const Text(
-                    'Vegan Resto',
-                    style: kHomeSubjectStyle,
-                  ),
-                  Text(
-                    '12 Mins',
-                    style: kHintInputStyle,
-                  )
-                ],
+                cardChild: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context, CustomPageRoute(child: const RestaurantDetail()));
+              },
+              child: SizedBox(
+                height: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/Logo.png'),
+                    const Text(
+                      'Vegan Resto',
+                      style: kHomeSubjectStyle,
+                    ),
+                    Text(
+                      '12 Mins',
+                      style: kHintInputStyle,
+                    )
+                  ],
+                ),
               ),
             ));
           }, childCount: 2),
