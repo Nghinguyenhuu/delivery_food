@@ -26,58 +26,56 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          child: Pattern(
-            child: Stack(children: [
-              Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Logo(),
-                  ),
-                  Form(
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: Text(
-                            'Login To Your Account',
-                            style: kHeadingStyle,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        ReusableCard(
-                            cardChild: InputContent(
-                          label: 'Email',
-                          myController: emailcontroller,
-                        )),
-                        ReusableCard(
-                            cardChild: InputContent(
-                          label: 'Password',
-                          isPassword: true,
-                          myController: passwordcontroller,
-                        )),
-                      ],
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Pattern(
+              child: Stack(children: [
+                Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Logo(),
                     ),
-                  ),
-                  const ContinueWith(),
-                ],
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
-                  child: CTAButton(
-                      onTap: () {
-                        buildLogin(
-                            emailcontroller.text, passwordcontroller.text);
-                      },
-                      label: 'Login'),
+                    Form(
+                      child: Column(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(
+                              'Login To Your Account',
+                              style: kHeadingStyle,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          ReusableCard(
+                              cardChild: InputContent(
+                            label: 'Email',
+                            myController: emailcontroller,
+                          )),
+                          ReusableCard(
+                              cardChild: InputContent(
+                            label: 'Password',
+                            isPassword: true,
+                            myController: passwordcontroller,
+                          )),
+                        ],
+                      ),
+                    ),
+                    const ContinueWith(),
+                    CTAButton(
+                        onTap: () {
+                          buildLogin(
+                              emailcontroller.text, passwordcontroller.text);
+                        },
+                        label: 'Login'),
+                  ],
+                  
                 ),
-              )
-            ]),
+                
+              ]),
+            ),
           ),
         ));
   }
