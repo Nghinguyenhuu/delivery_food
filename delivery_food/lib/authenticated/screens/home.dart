@@ -326,7 +326,7 @@ class _HomeState extends State<Home> {
                 cardChild: GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context, CustomPageRoute(child: const RestaurantDetail()));
+                    context, CustomPageRoute(child: const RestaurantDetail(isRestaurant: true,)));
               },
               child: SizedBox(
                 height: 300,

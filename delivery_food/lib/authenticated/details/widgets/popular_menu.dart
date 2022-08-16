@@ -3,7 +3,10 @@ import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
 import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/data/model/restaurant.dart';
+import 'package:delivery_food/routes/fade_route.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../menu_detail.dart';
 
 class PopularMenu extends StatelessWidget {
   const PopularMenu({Key? key}) : super(key: key);
@@ -41,23 +44,26 @@ class PopularMenu extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: ReusableCard(
-                    cardChild: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(restaurants[index].assetImage),
-                      Text(
-                        restaurants[index].name,
-                        style: kHomeSubjectStyle,
-                      ),
-                      Text(
-                        '${restaurants[index].deliveryTime} mins',
-                        style: kHintInputStyle,
-                      )
-                    ],
-                  ),
-                )),
+                    cardChild: GestureDetector(
+                      onTap: (){Navigator.push(context, CustomPageRoute(child: const MenuDetail()));},
+                      child: SizedBox(
+                                      width: MediaQuery.of(context).size.width * 0.35,
+                                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(restaurants[index].assetImage),
+                        Text(
+                          restaurants[index].name,
+                          style: kHomeSubjectStyle,
+                        ),
+                        Text(
+                          '${restaurants[index].deliveryTime} mins',
+                          style: kHintInputStyle,
+                        )
+                      ],
+                                      ),
+                                    ),
+                    )),
               );
             },
             itemCount: restaurants.length,

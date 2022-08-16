@@ -38,7 +38,7 @@ class Navigation extends StatelessWidget {
                 color: AppColors.lightgreen,
               ),
               const SizedBox(
-                width: 20,
+                width: 10,
               ),
               DetailsButton(
                   icon: Image.asset(

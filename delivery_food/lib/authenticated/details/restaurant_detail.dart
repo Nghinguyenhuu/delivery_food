@@ -8,11 +8,18 @@ import 'package:delivery_food/constans/app_stype.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
-class RestaurantDetail extends StatelessWidget {
-  const RestaurantDetail({Key? key}) : super(key: key);
+class RestaurantDetail extends StatefulWidget {
+  final bool isRestaurant;
+  const RestaurantDetail({Key? key, required this.isRestaurant}) : super(key: key);
 
   @override
+  State<RestaurantDetail> createState() => _RestaurantDetailState();
+}
+
+class _RestaurantDetailState extends State<RestaurantDetail> {
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -22,6 +29,7 @@ class RestaurantDetail extends StatelessWidget {
               pinned: true,
               toolbarHeight: 100,
               expandedHeight: 300,
+              elevation: 0,
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: EdgeInsets.zero,
                 title: Image.asset(
