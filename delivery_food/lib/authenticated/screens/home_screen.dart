@@ -1,6 +1,6 @@
 import 'package:delivery_food/authenticated/screens/chat.dart';
 import 'package:delivery_food/authenticated/screens/home.dart';
-import 'package:delivery_food/authenticated/screens/shop.dart';
+import 'package:delivery_food/authenticated/screens/buy.dart';
 import 'package:delivery_food/components/home_bottom_item.dart';
 import 'package:delivery_food/data/model/user.dart';
 
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> screen = [
     const Home(),
     const Profile(),
-    const Shop(),
+    const Buy(),
     const Chat()
   ];
 
@@ -76,9 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     activeIcon:const HomeBottomItem(
                       assetImage: 'assets/icons/Buy.png',
                       label: 'Buy',
-  
                     ),
-                    label: 'Shop'),
+                    label: 'Buy'),
                 BottomNavigationBarItem(
                     icon: Image.asset('assets/icons/Chat.png'),
                     activeIcon:const HomeBottomItem(
