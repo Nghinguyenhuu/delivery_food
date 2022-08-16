@@ -10,7 +10,6 @@ import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -82,11 +81,12 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 
-  Future buildLogin(String user, String password)async {    
-      if(listUSer.any((element) => element.username == user && element.password ==password)){
-        User userAuth = listUSer.firstWhere((element) => element.username == user && element.password == password);
-        Navigator.pushNamed(context,RouteGenerator.home,arguments: userAuth);
-      }
-    
+  Future buildLogin(String user, String password) async {
+    if (listUSer.any((element) =>
+        element.username == user && element.password == password)) {
+      User userAuth = listUSer.firstWhere((element) =>
+          element.username == user && element.password == password);
+      Navigator.pushNamed(context, RouteGenerator.home, arguments: userAuth);
+    }
   }
 }
