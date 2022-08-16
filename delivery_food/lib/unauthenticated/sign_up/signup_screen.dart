@@ -1,5 +1,3 @@
-
-
 import 'package:delivery_food/components/custom_checkbox.dart';
 import 'package:delivery_food/components/input_content.dart';
 
@@ -15,8 +13,10 @@ import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
+import '../../provider/user_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -31,11 +31,21 @@ class _SignUpPageState extends State<SignUpScreen> {
   final passwordcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    bool buildCreateAccount(String pass, String username, String email) {
+      if (pass != "" && username != "" && email != "") {
+        User user = User(username: username, password: pass, email: email);
+        userProvider.addUser(user);
+        return true;
+      }
+      return false;
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       body: SafeArea(
-        child: SingleChildScrollView (
+        child: SingleChildScrollView(
           child: Pattern(
             child: Stack(children: [
               Column(
@@ -125,13 +135,21 @@ class _SignUpPageState extends State<SignUpScreen> {
                               cardChild: CTAButton(
                                   onTap: () {
                                     buildCreateAccount(
-                                        usercontroller.text,
-                                        passwordcontroller.text,
-                                        emailcontroller.text)
-                                        ? Navigator.push(context,MaterialPageRoute(builder: (context)=> const LoginPage()))
-                                        : showDialog(context: context, builder:(context) =>const AlertDialog(
-                                          content: Text('Username, Password or Email is empty'),
-                                        ));              
+                                            usercontroller.text,
+                                            passwordcontroller.text,
+                                            emailcontroller.text)
+                                        ? Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const LoginPage()))
+                                        : showDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                const AlertDialog(
+                                                  content: Text(
+                                                      'Username, Password or Email is empty'),
+                                                ));
                                   },
                                   label: 'Create Account')),
                           const SizedBox(
@@ -139,7 +157,8 @@ class _SignUpPageState extends State<SignUpScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, RouteGenerator.signin);
+                              Navigator.pushNamed(
+                                  context, RouteGenerator.signin);
                             },
                             child: GradientText('Already have an account',
                                 style: kMidiumStyle,
@@ -160,13 +179,4 @@ class _SignUpPageState extends State<SignUpScreen> {
       ),
     );
   }
-
-  bool buildCreateAccount(String pass, String username, String email) {
-    if(pass != "" && username != "" && email!=""){
-      User user = User(password: pass, username: username, email: email);
-      UserData().addUser(user);
-      return true;
-    }
-    return false;
-}
 }
