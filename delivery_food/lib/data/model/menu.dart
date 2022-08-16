@@ -1,11 +1,11 @@
-class Menu {
+class Dish {
   int id;
   String assetImage;
   String name;
   String ofRestaurant;
   int price;
 
-  Menu(
+  Dish(
       {required this.assetImage,
       required this.id,
       required this.name,
