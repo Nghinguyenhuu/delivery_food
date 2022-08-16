@@ -29,7 +29,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentindex = 0;
   List<Restaurant> restaurants = allRestaurant;
-  List<Menu> menus = allMenu;
+  List<Dish> menus = allMenu;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -326,7 +326,11 @@ class _HomeState extends State<Home> {
                 cardChild: GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context, CustomPageRoute(child: const RestaurantDetail(isRestaurant: true,)));
+                    context,
+                    CustomPageRoute(
+                        child: const RestaurantDetail(
+                      isRestaurant: true,
+                    )));
               },
               child: SizedBox(
                 height: 300,

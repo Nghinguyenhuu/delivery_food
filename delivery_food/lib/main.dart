@@ -1,3 +1,4 @@
+import 'package:delivery_food/authenticated/details/restaurant_detail.dart';
 import 'package:delivery_food/routes/route.dart';
 
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  
 
   // This widget is the root of your application.
   @override
@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: RouteGenerator.splash,
-      onGenerateRoute: RouteGenerator.generateRoute,
+      home: const RestaurantDetail(isRestaurant: true),
+      // initialRoute: RouteGenerator.splash,
+      // onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
