@@ -1,12 +1,14 @@
 class Dish {
   int id;
-  String imageUrl;
+  String imageName;
   String name;
   String ofRestaurant;
   int price;
+  final int deliveryTime;
 
   Dish(
-      {required this.imageUrl,
+      {required this.imageName,
+      required this.deliveryTime,
       required this.id,
       required this.name,
       required this.ofRestaurant,

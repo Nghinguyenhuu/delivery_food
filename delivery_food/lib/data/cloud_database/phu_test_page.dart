@@ -1,4 +1,5 @@
 import 'package:delivery_food/data/cloud_database/get_firestore_image.dart';
+import 'package:delivery_food/data/cloud_database/restaurent_getter.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -26,10 +27,11 @@ class _TestPageState extends State<TestPage> {
                 child: snapshot.data,
               );
             }
-            return Text("notdone");
+            return Text("loading not done");
           }),
         ),
         Text("Things done"),
+        Text(RestaurentInfoGetter.GetAllData().toString()),
       ]),
     );
   }

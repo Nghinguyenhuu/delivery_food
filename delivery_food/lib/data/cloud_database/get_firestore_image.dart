@@ -12,7 +12,7 @@ class FireStorageService extends ChangeNotifier {
   }
 
   static Future<Image> getImage(BuildContext context, String imageName) async {
-    Image image = Image.asset('assets/images/' + "Logo.png"); //placeholder
+    Image image = Image.asset('assets/images/Logo.png'); //placeholder
     // return image;
     await FireStorageService.loadImage(context, imageName).then((value) {
       image = Image.network(

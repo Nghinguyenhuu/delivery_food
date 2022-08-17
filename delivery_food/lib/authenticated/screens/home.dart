@@ -211,15 +211,11 @@ class _HomeState extends State<Home> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(restaurants[index].assetImage),
+                  Image.asset(restaurants[index].imageName),
                   Text(
                     restaurants[index].name,
                     style: kHomeSubjectStyle,
                   ),
-                  Text(
-                    '${restaurants[index].deliveryTime} mins',
-                    style: kHintInputStyle,
-                  )
                 ],
               ),
             ));

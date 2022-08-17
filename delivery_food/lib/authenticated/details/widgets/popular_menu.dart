@@ -45,25 +45,24 @@ class PopularMenu extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 20),
                 child: ReusableCard(
                     cardChild: GestureDetector(
-                      onTap: (){Navigator.push(context, CustomPageRoute(child: const MenuDetail()));},
-                      child: SizedBox(
-                                      width: MediaQuery.of(context).size.width * 0.35,
-                                      child: Column(
+                  onTap: () {
+                    Navigator.push(
+                        context, CustomPageRoute(child: const MenuDetail()));
+                  },
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(restaurants[index].assetImage),
+                        Image.asset(restaurants[index].imageName),
                         Text(
                           restaurants[index].name,
                           style: kHomeSubjectStyle,
                         ),
-                        Text(
-                          '${restaurants[index].deliveryTime} mins',
-                          style: kHintInputStyle,
-                        )
                       ],
-                                      ),
-                                    ),
-                    )),
+                    ),
+                  ),
+                )),
               );
             },
             itemCount: restaurants.length,
