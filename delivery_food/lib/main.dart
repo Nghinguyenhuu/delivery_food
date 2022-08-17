@@ -1,9 +1,14 @@
 import 'package:delivery_food/authenticated/details/restaurant_detail.dart';
+import 'package:delivery_food/data/cloud_database/phu_test_page.dart';
 import 'package:delivery_food/routes/route.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -19,7 +24,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const RestaurantDetail(isRestaurant: true),
+      // home: Scaffold(),
+      // home: const RestaurantDetail(isRestaurant: true),
+      home: TestPage(),
       // initialRoute: RouteGenerator.splash,
       // onGenerateRoute: RouteGenerator.generateRoute,
     );

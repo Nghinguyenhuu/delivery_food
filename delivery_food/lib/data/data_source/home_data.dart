@@ -27,25 +27,25 @@ List<Restaurant> allRestaurant = [
 
 List<Dish> allMenu = [
   Dish(
-      assetImage: 'assets/images/MenuPhoto.png',
+      imageUrl: 'assets/images/MenuPhoto.png',
       id: 1,
       name: 'Herbal Pancake',
       ofRestaurant: 'Warung Herbal',
       price: 7),
   Dish(
-      assetImage: 'assets/images/MenuPhoto.png',
+      imageUrl: 'assets/images/MenuPhoto.png',
       id: 2,
       name: 'Herbal Pancake',
       ofRestaurant: 'Warung Herbal',
       price: 7),
   Dish(
-      assetImage: 'assets/images/MenuPhoto.png',
+      imageUrl: 'assets/images/MenuPhoto.png',
       id: 3,
       name: 'Herbal Pancake',
       ofRestaurant: 'Warung Herbal',
       price: 7),
   Dish(
-      assetImage: 'assets/images/MenuPhoto.png',
+      imageUrl: 'assets/images/MenuPhoto.png',
       id: 4,
       name: 'Herbal Pancake',
       ofRestaurant: 'Warung Herbal',
