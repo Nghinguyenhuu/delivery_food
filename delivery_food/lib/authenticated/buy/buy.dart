@@ -1,3 +1,4 @@
+import 'package:delivery_food/authenticated/buy/widget/total.dart';
 import 'package:delivery_food/authenticated/buy/widget/trailing_buy_item.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
@@ -23,7 +24,7 @@ class Buy extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            LeadingButton(onPress: () {}),
+            LeadingButton(onPress: () {Navigator.pop(context);}),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Text(
@@ -32,41 +33,46 @@ class Buy extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.of(context).size.height * 0.45,
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return ReusableCard(
-                      cardChild: ListTile(
+                      cardChild: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: ListTile(
                     leading: Image.asset(
-                      'assets/images/MenuPhoto.png',
-                      width: 62,
-                      height: 62,
+                        'assets/images/MenuPhoto.png',
+                        width: 62,
+                        height: 62,
                     ),
                     title: const Text(
-                      'Spacy fresh crab',
-                      style: kSubTitleStyle,
+                        'Spacy fresh crab',
+                        style: kSubTitleStyle,
                     ),
                     subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Waroenk kita',
-                          style: kHintInputStyle,
-                        ),
-                        const SizedBox(height: 10,),
-                        GradientText('\$ 35', colors:const [AppColors.appLinerColorStart,AppColors.appLinerColorEnd],style: const TextStyle(
-                                        fontFamily: 'BentonSans Bold',
-                                        fontSize: 18),)
-                      ],
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Waroenk kita',
+                            style: kHintInputStyle,
+                          ),
+                          const SizedBox(height: 10,),
+                          GradientText('\$ 35', colors:const [AppColors.appLinerColorStart,AppColors.appLinerColorEnd],style: const TextStyle(
+                                          fontFamily: 'BentonSans Bold',
+                                          fontSize: 18),)
+                        ],
                     ),
                     trailing: const TrailingBuyItem()
-                  )
+                  ),
+                      )
                   )
                   ;
                 },
                 itemCount: 3,
               ),
-            )
+            ),
+            const Total(),
+            
           ],
         ))));
   }
