@@ -1,3 +1,4 @@
+import 'package:delivery_food/data/cloud_database/get_firestore_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -17,7 +18,7 @@ class _TestPageState extends State<TestPage> {
       appBar: AppBar(title: const Text("Testpage")),
       body: Column(children: [
         FutureBuilder<Image>(
-          future: _getImage(context, "PhotoRestaurant.png"),
+          future: FireStorageService.getImage(context, "PhotoRestaurant.png"),
           builder: ((context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               // return Text(snapshot.data.toString());
@@ -31,28 +32,5 @@ class _TestPageState extends State<TestPage> {
         Text("Things done"),
       ]),
     );
-  }
-
-  Future<Image> _getImage(BuildContext context, String imageName) async {
-    Image image = Image.asset('assets/images/' + "Logo.png"); //placeholder
-    // return image;
-    await FireStorageService.loadImage(context, imageName).then((value) {
-      image = Image.network(
-        value.toString(),
-        fit: BoxFit.cover,
-      );
-    });
-    return image;
-  }
-}
-
-class FireStorageService extends ChangeNotifier {
-  FireStorageService();
-  static Future<dynamic> loadImage(
-      BuildContext context, String imageName) async {
-    return await FirebaseStorage.instance
-        .ref()
-        .child(imageName)
-        .getDownloadURL();
   }
 }
