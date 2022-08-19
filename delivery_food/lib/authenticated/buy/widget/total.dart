@@ -1,11 +1,14 @@
 import 'package:delivery_food/authenticated/buy/widget/sub_total.dart';
 import 'package:delivery_food/constans/app_colors.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class Total extends StatelessWidget {
-  const Total({Key? key}) : super(key: key);
+  final int subtotal;
+  final int deliverycharge;
+  final int discount;
+  const Total({Key? key, required this.subtotal, required this.discount, required this.deliverycharge}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +27,17 @@ class Total extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(30, 25, 20, 10),
         child: Column(
           children: [
-            const Subtotal(label: 'Sub-total', cost: 120),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: Subtotal(label: 'Sub-total', cost: 10),
+             Subtotal(label: 'Sub-total', cost: subtotal),
+            Padding(
+              padding:const EdgeInsets.symmetric(vertical: 8),
+              child: Subtotal(label: 'Delivery Charge', cost: deliverycharge),
             ),
-            const Subtotal(label: 'Sub-total', cost: 20),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
+            Subtotal(label: 'Discount', cost: discount),
+             Padding(
+              padding:const EdgeInsets.symmetric(vertical: 20),
               child: Subtotal(
                 label: 'Total',
-                cost: 110,
+                cost: subtotal + deliverycharge - discount,
                 size: 18,
               ),
             ),

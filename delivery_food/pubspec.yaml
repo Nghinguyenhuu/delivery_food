@@ -26,6 +26,9 @@ dependencies:
 
   #font awesome
   font_awesome_flutter: ^10.1.0
+
+  #slidable
+  flutter_slidable: ^2.0.0
   #Multi Sliver
   sliver_tools: ^0.2.7
   # The following adds the Cupertino Icons font to your application.
