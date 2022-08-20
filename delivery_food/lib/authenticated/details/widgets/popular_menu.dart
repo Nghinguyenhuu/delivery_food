@@ -13,7 +13,7 @@ class PopularMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Restaurant> restaurants = allRestaurant;
+    List<Restaurent> restaurants = allRestaurant;
     return Column(
       children: [
         Padding(

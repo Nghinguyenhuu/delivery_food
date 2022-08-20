@@ -28,7 +28,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentindex = 0;
-  List<Restaurant> restaurants = allRestaurant;
+  List<Restaurent> restaurants = allRestaurant;
   List<Dish> menus = allMenu;
   @override
   Widget build(BuildContext context) {

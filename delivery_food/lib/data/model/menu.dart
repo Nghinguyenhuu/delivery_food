@@ -1,5 +1,5 @@
 class Dish {
-  int id;
+  String id;
   String imageName;
   String name;
   String ofRestaurant;
