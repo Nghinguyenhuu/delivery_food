@@ -2,15 +2,27 @@ import 'package:delivery_food/data/model/restaurant.dart';
 
 import '../model/menu.dart';
 
-List<Restaurent> allRestaurant = [
-  Restaurent(
-      imageName: 'assets/images/Logo.png', id: '1', name: 'Herbal Pancake'),
-  Restaurent(
-      imageName: 'assets/images/Logo.png', id: '2', name: 'Herbal Pancake'),
-  Restaurent(
-      imageName: 'assets/images/Logo.png', id: '3', name: 'Herbal Pancake'),
-  Restaurent(
-      imageName: 'assets/images/Logo.png', id: '4', name: 'Herbal Pancake'),
+List<Restaurant> allRestaurant = [
+  Restaurant(
+      imageName: 'assets/images/Logo.png',
+      id: '1',
+      name: 'Herbal Pancake',
+      rate: 5),
+  Restaurant(
+      imageName: 'assets/images/Logo.png',
+      id: '2',
+      name: 'Herbal Pancake',
+      rate: 5),
+  Restaurant(
+      imageName: 'assets/images/Logo.png',
+      id: '3',
+      name: 'Herbal Pancake',
+      rate: 5),
+  Restaurant(
+      imageName: 'assets/images/Logo.png',
+      id: '4',
+      name: 'Herbal Pancake',
+      rate: 5),
 ];
 
 List<Dish> allMenu = [

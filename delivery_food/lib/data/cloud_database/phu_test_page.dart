@@ -21,54 +21,88 @@ class _TestPageState extends State<TestPage> {
   Widget build(BuildContext context) {
     final restaurentsCollection =
         FirebaseFirestore.instance.collection('restaurents');
+    final listResDoc = restaurentsCollection
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => Restaurant.fromJson(doc.data())))
+        .toList();
 
     return Scaffold(
       appBar: AppBar(title: const Text("Testpage")),
-      body: Column(children: [
-        FutureBuilder<Image>(
-          future: FireStorageService.getImage(context, "PhotoRestaurant.png"),
+      // body: Column(children: [
+      //   Text("fir"),
+      // ListView.builder(
+      //     // itemCount: restaurents.length,
+      //     itemCount: 2,
+      //     itemBuilder: (BuildContext context, int index) {
+      //       return Card(
+      //           child: ListTile(
+      //               leading: Icon(Icons.add), title: Text(index.toString())));
+      //       // return RestaurentBuilderForTestOnly(
+      //       //     restaurent: restaurents[index]);
+      //     }),
+      body: StreamBuilder<List<Restaurant>>(
+        stream: RestaurentInfoGetter.getListOfRestaurentStreamly(
+            restaurentsCollection),
+        builder: ((context, snapshot) {
+          if (snapshot.hasData) {
+            final restaurents = snapshot.data!;
+            return ListView.builder(
+                // itemCount: restaurents.length,
+                scrollDirection: Axis.vertical,
+                itemCount: 2,
+                itemBuilder: (BuildContext context, int index) {
+                  // return ListTile(title: Text(index.toString()));
+                  return RestaurentBuilderForTestOnly(
+                      restaurent: restaurents[index]);
+                });
+            // return RestaurentBuilderForTestOnly(restaurent: restaurents[0]);
+            // return Text(restaurents[0].name.toString());
+          }
+          return Text("restaurents data not loaded");
+        }),
+      ),
+      // body: FutureBuilder<Image>(
+      //     future: FireStorageService.getImage(context, "PhotoRestaurant.png"),
+      //     builder: ((context, snapshot) {
+      //       if (snapshot.connectionState == ConnectionState.done) {
+      //         return Container(child: snapshot.data);
+      //       }
+      //       return Text("image not loaded");
+      //     })),
+      // RestaurentBuilderForTestOnly(
+      //   restaurent: Restaurent(
+      //     id: "asdfasdf",
+      //     name: "gigo",
+      //     imageName: "PhotoRestaurent.png",
+      //     rate: 5,
+      //   ),
+      // ),
+      // ]
+      // ),
+    );
+  }
+}
+
+class RestaurentBuilderForTestOnly extends StatelessWidget {
+  final Restaurant restaurent;
+  const RestaurentBuilderForTestOnly({Key? key, required this.restaurent})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Text(restaurent.id),
+      Text(restaurent.name),
+      Text(restaurent.rate.toString() + "rating"),
+      FutureBuilder<Image>(
+          future: FireStorageService.getImage(context, restaurent.imageName),
           builder: ((context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              // return Text(snapshot.data.toString());
-              return Container(
-                child: snapshot.data,
-              );
+              return Container(child: snapshot.data);
             }
-            return Text("loading not done");
-          }),
-        ),
-        Text("Things done"),
-        // StreamBuilder<List<Restaurant>>(
-        //   stream: RestaurentInfoGetter.getAllData(),
-        //   builder: ((context, snapshot) {
-        //     if (snapshot.hasData) {
-        //       final restaurents = snapshot.data!;
-        //       return Text(restaurents.length.toString());
-        //     } else {
-        //       return Text("restaurents data not loaded");
-        //     }
-        //   }),
-        // )
-        FutureBuilder(
-            future: RestaurentInfoGetter.getRestaurentFromCollection(
-                restaurentsCollection, 'BjW8fu6XXRPNhRe3x7Nk'),
-            builder: (BuildContext context,
-                AsyncSnapshot<DocumentSnapshot> snapshot) {
-              if (snapshot.hasError) {
-                return Text("Something wrong!");
-              }
-              // if (snapshot.hasData && !snapshot.data!.exists) {
-              //   return Text("Document doesn't exists");
-              // }
-              if (snapshot.connectionState == ConnectionState.done) {
-                final json = snapshot.data!.data() as Map<String, dynamic>;
-                final res = Restaurent.fromJson(json);
-                return Text(res.name);
-              }
-
-              return Text("null something");
-            })
-      ]),
-    );
+            return Text("image not loaded");
+          }))
+    ]);
   }
 }

@@ -1,22 +1,24 @@
-class Restaurent {
+class Restaurant {
   final String id;
   final String name;
   final String imageName;
-  double rate = 5;
+  final int rate;
   List<String> dishesID = [];
   List<String> commentsID = [];
 
-  Restaurent(
+  Restaurant(
       {required this.imageName,
       required this.id,
       required this.name,
-      this.rate = 5});
+      required this.rate});
 
-  static Restaurent fromJson(Map<String, dynamic> json) {
-    return Restaurent(
+  static Restaurant fromJson(Map<String, dynamic> json) {
+    return Restaurant(
       imageName: json['imageName'].toString(),
       id: json['id'].toString(),
       name: json['name'].toString(),
+      rate: json['rate'],
+      // rate: 5,
     );
   }
 }
