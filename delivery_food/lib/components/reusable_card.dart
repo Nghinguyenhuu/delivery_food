@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class ReusableCard extends StatelessWidget {
 
   final Widget cardChild;
-  const ReusableCard({Key? key, required this.cardChild}) : super(key: key);
+  final double? padding;
+  const ReusableCard({Key? key, required this.cardChild, this.padding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10,bottom: 10),
+      padding:  EdgeInsets.only(top:padding ?? 10 ,bottom: padding?? 10),
       child: Container(
         decoration:  BoxDecoration(
           color: Colors.white,
