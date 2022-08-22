@@ -1,7 +1,9 @@
+import 'package:delivery_food/authenticated/buy/edit_payment_method.dart';
 import 'package:delivery_food/authenticated/buy/widget/total.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
+import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/widget/leading_button.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +82,7 @@ class ConfirmOrder extends StatelessWidget {
                           style: kHintInputStyle,
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {Navigator.push(context, CustomPageRoute(child: const EditPaymentMethod()));},
                             child: GradientText('Edit', colors: const [
                               AppColors.appLinerColorStart,
                               AppColors.appLinerColorEnd
