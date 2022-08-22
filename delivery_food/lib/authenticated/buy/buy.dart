@@ -119,7 +119,7 @@ class _BuyState extends State<Buy> {
               ),
             ),
              Total(subtotal: calSubTotal(numProduct, [35,35,35]),deliverycharge: 10,discount: 20,onPress: (){
-              Navigator.push(context,CustomPageRoute(child:const ConfirmOrder() ));
+              Navigator.push(context,CustomPageRoute(child: ConfirmOrder(total:Total(subtotal: calSubTotal(numProduct, [35,35,35]),deliverycharge: 10,discount: 20,)) ));
              },),
           ],
         ))));
