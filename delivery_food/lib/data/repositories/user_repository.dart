@@ -23,7 +23,7 @@ class UserReposiroryImpl implements UserReposirory{
 
   @override
   Future<List<User>> getAllUser() async{
-    return await userService.allUser;
+    return  userService.allUser;
   }
 
   @override

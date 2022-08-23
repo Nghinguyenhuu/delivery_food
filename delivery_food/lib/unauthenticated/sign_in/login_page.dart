@@ -2,7 +2,6 @@ import 'package:delivery_food/components/input_content.dart';
 import 'package:delivery_food/components/login_with.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_stype.dart';
-import 'package:delivery_food/data/data_source/list_data_user_default.dart';
 import 'package:delivery_food/data/model/user.dart';
 import 'package:delivery_food/provider/user_provider.dart';
 import 'package:delivery_food/routes/route.dart';

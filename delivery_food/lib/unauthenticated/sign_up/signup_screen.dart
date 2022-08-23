@@ -4,7 +4,6 @@ import 'package:delivery_food/components/input_content.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
-import 'package:delivery_food/data/data_source/user_data.dart';
 import 'package:delivery_food/data/model/user.dart';
 import 'package:delivery_food/routes/route.dart';
 import 'package:delivery_food/unauthenticated/sign_in/login_page.dart';

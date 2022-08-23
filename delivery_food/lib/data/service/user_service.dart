@@ -20,11 +20,11 @@ class UserService {
       for (var doc in event.docs) {
         allUser.add(User.fromJson(doc.id, doc.data()));
 
-        print("${doc.id} => ${doc.data()}");
+        // print("${doc.id} => ${doc.data()}");
       }
     });
 
-    return await allUser;
+    return  allUser;
   }
 
   Future<User> getUser(String id) async {
@@ -33,7 +33,7 @@ class UserService {
         return user;
       }
     }
-    return User();
+    return const User();
   }
 
   Future<String> addUser(User user) async {

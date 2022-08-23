@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import '../data/model/user.dart';
 
 class UserProvider extends ChangeNotifier {
-  List<User> _ListUser = [];
-  User _user = User();
+  List<User> _listUser = [];
+  User _user = const User();
   UserReposirory userRepository = UserReposiroryImpl();
 
   List<User> get listUser {
-    return _ListUser;
+    return _listUser;
   }
 
   User get user {
@@ -21,7 +21,7 @@ class UserProvider extends ChangeNotifier {
     // notifyListeners();
   }
   _init() async {
-    _ListUser = await userRepository.getAllUser();
+    _listUser = await userRepository.getAllUser();
     notifyListeners();
 
     // notifyListeners();
@@ -29,7 +29,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<bool> getUser(String userName, String passwork) async {
     await _init();
-    for (var user in _ListUser) {
+    for (var user in _listUser) {
       if (user.username == userName && user.password == passwork) {
         _user = user;
         notifyListeners();
