@@ -3,17 +3,26 @@ import 'package:delivery_food/authenticated/buy/widget/total.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
+import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/widget/leading_button.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
-class ConfirmOrder extends StatelessWidget {
+class ConfirmOrder extends StatefulWidget {
 
   final Total total;
 
   const ConfirmOrder({Key? key, required this.total}) : super(key: key);
+
+  @override
+  State<ConfirmOrder> createState() => _ConfirmOrderState();
+  
+}
+
+class _ConfirmOrderState extends State<ConfirmOrder> {
+  String? asset;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +91,9 @@ class ConfirmOrder extends StatelessWidget {
                           style: kHintInputStyle,
                         ),
                         TextButton(
-                            onPressed: () {Navigator.push(context, CustomPageRoute(child: const EditPaymentMethod()));},
+                            onPressed: (){
+                              Navigator.push(context, CustomPageRoute(child: const EditPaymentMethod()));
+                            },
                             child: GradientText('Edit', colors: const [
                               AppColors.appLinerColorStart,
                               AppColors.appLinerColorEnd
@@ -94,7 +105,7 @@ class ConfirmOrder extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset('assets/images/paypal.png'),
+                          Image.asset('assets/images/${asset ?? 'visa.png'}'),
                           const Text('2121 6352 8465 ****')
                         ],
                       ),
@@ -106,11 +117,13 @@ class ConfirmOrder extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: total,
+            child: widget.total,
           )
         ],
       )
       )),
     );
   }
+  
+
 }
