@@ -5,11 +5,12 @@ class InputContent extends StatefulWidget {
   final Widget? icon;
   final String label;
   final bool? isPassword;
+  final TextEditingController? myController;
   const InputContent({
     Key? key,
     this.icon,
     required this.label,
-    this.isPassword,
+    this.isPassword,  this.myController,
   }) : super(key: key);
   @override
   State<InputContent> createState() => _InputContentState();
@@ -19,11 +20,11 @@ class InputContent extends StatefulWidget {
 
 class _InputContentState extends State<InputContent> {
 
-  bool selected = true;
-
+  bool selected = false;
   @override
   void initState() {
-    selected = true;
+    selected = false;
+    widget.isPassword == true ? selected = true : selected = false;
     super.initState();
   }
 
@@ -35,6 +36,7 @@ class _InputContentState extends State<InputContent> {
       child: Stack(
         children: [
           TextFormField(
+            controller: widget.myController,
             decoration: InputDecoration(
               icon: widget.icon,
               hintText: widget.label,
