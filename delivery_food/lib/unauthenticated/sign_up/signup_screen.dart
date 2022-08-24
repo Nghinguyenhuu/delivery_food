@@ -35,7 +35,6 @@ class _SignUpPageState extends State<SignUpScreen> {
       if (pass != "" && username != "" && email != "") {
         User user = User(username: username, password: pass, email: email);
         userProvider.addUser(user);
-        print(username);
         return true;
       }
       return false;
