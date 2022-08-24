@@ -31,10 +31,11 @@ class _SignUpPageState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    bool buildCreateAccount(String pass, String username, String email) {
+    bool buildCreateAccount( String username,String pass, String email) {
       if (pass != "" && username != "" && email != "") {
         User user = User(username: username, password: pass, email: email);
         userProvider.addUser(user);
+        print(username);
         return true;
       }
       return false;

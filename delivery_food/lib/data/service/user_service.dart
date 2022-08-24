@@ -42,7 +42,7 @@ class UserService {
         .collection("users")
         .add(user.toJson())
         .then((DocumentReference doc) => id = doc.id);
-
+    print(id);
     return id;
   }
 
