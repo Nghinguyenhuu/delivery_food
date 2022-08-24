@@ -31,9 +31,9 @@ class _SignUpPageState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    bool buildCreateAccount( String username,String pass, String email) {
+    Future<bool> buildCreateAccount( String username,String pass, String email) async{
       if (pass != "" && username != "" && email != "") {
-        if(userProvider.checkUsernameContain(username)){
+        if(await userProvider.checkUsernameContain(username)){
           return false;
         }
         User user = User(username: username, password: pass, email: email);
@@ -118,7 +118,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                   Row(
                     children: [
                       const CustomCheckbox(),
-                      Padding(
+                      Padding(  
                         padding: const EdgeInsets.only(left: 12),
                         child: Text(
                           'Email Me About Special Pricing',
@@ -135,8 +135,8 @@ class _SignUpPageState extends State<SignUpScreen> {
                         children: [
                           ReusableCard(
                               cardChild: CTAButton(
-                                  onTap: () {
-                                    buildCreateAccount(
+                                  onTap: ()async {
+                                    await buildCreateAccount(
                                             usercontroller.text,
                                             passwordcontroller.text,
                                             emailcontroller.text)
@@ -150,7 +150,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                                             builder: (context) =>
                                                 const AlertDialog(
                                                   content: Text(
-                                                      'Username, Password or Email is empty'),
+                                                      'Your account already exists or is not valid'),
                                                 ));
                                   },
                                   label: 'Create Account')),

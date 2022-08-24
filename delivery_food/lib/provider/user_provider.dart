@@ -54,8 +54,8 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool checkUsernameContain(String userName){
-    bool isContains =  userRepository.checkUserName(userName);
+  Future<bool> checkUsernameContain(String userName)async{
+    bool isContains = await userRepository.checkUserName(userName);
     notifyListeners();
     return isContains ;
   }

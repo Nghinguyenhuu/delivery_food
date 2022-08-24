@@ -7,7 +7,7 @@ abstract class UserReposirory{
   Future<String> checkUser(String username, String passwork);
   Future addUser(User user);
   Future<User> updateUser(User user);
-  bool checkUserName(String username);
+  Future<bool> checkUserName(String username);
 }
 
 class UserReposiroryImpl implements UserReposirory{
@@ -39,8 +39,8 @@ class UserReposiroryImpl implements UserReposirory{
   }
   
   @override
-  bool checkUserName(String username){
-    bool isContains = userService.checkUserName(username);
+  Future<bool> checkUserName(String username)async{
+    bool isContains = await userService.checkUserName(username);
     return isContains;
   }
 
