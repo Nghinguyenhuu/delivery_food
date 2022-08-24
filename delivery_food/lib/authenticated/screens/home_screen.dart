@@ -21,17 +21,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   
  int currentIndex = 0;
-
   final List<Widget> screen = [
     const Home(),
     const Profile(),
     const Buy(),
     const Chat()
   ];
-
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBodyBehindAppBar: true,

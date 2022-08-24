@@ -16,15 +16,16 @@ class UserService {
   }
 
   Future<List<User>> getAllUser() async {
+    List<User> list = [];
     await db.collection("users").get().then((event) {
       for (var doc in event.docs) {
-        allUser.add(User.fromJson(doc.id, doc.data()));
-
+        list.add(User.fromJson(doc.id, doc.data()));
         print("${doc.id} => ${doc.data()}");
       }
     });
-
-    return await allUser;
+    allUser.clear();
+    allUser.addAll(list);
+    return allUser;
   }
 
   Future<User> getUser(String id) async {
