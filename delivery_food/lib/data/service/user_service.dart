@@ -46,7 +46,7 @@ class UserService {
     return id;
   }
 
-  Future<bool> checkUserName(String userName) async {
+  bool checkUserName(String userName){
     for (var user in allUser) {
       if (user.username == userName) {
         return true;

@@ -33,6 +33,9 @@ class _SignUpPageState extends State<SignUpScreen> {
     final userProvider = Provider.of<UserProvider>(context);
     bool buildCreateAccount( String username,String pass, String email) {
       if (pass != "" && username != "" && email != "") {
+        if(userProvider.checkUsernameContain(username)){
+          return false;
+        }
         User user = User(username: username, password: pass, email: email);
         userProvider.addUser(user);
         return true;

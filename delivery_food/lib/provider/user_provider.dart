@@ -40,6 +40,7 @@ class UserProvider extends ChangeNotifier {
     return false;
   }
 
+
   Future addUser(User user) async {
     await userRepository.addUser(user);
     _init();
@@ -51,5 +52,11 @@ class UserProvider extends ChangeNotifier {
     _user = user;
     _init();
     notifyListeners();
+  }
+
+  bool checkUsernameContain(String userName){
+    bool isContains =  userRepository.checkUserName(userName);
+    notifyListeners();
+    return isContains ;
   }
 }
