@@ -6,6 +6,7 @@ class User {
   final String? firstname;
   final String? lastname;
   final String? mobilephone;
+  final String? image;
 
   const User(
       {this.id,
@@ -14,7 +15,8 @@ class User {
       this.email,
       this.firstname,
       this.lastname,
-      this.mobilephone});
+      this.mobilephone,
+      this.image});
 
   factory User.fromJson(String id, Map<String, dynamic> json) {
     return User(
@@ -23,6 +25,7 @@ class User {
         lastname: json["lastname"],
         email: json["email"],
         mobilephone: json["mobilephone"],
+        image: json["image"],
         username: json["username"],
         password: json["password"]);
   }
@@ -34,7 +37,8 @@ class User {
       "email": email,
       "mobilephone": mobilephone,
       "username": username,
-      "password": password
+      "password": password,
+      "image": image
     };
   }
 }
