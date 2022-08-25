@@ -1,14 +1,13 @@
-
-import 'package:delivery_food/components/app_alert_dialog.dart';
 import 'package:delivery_food/components/custom_checkbox.dart';
 import 'package:delivery_food/components/input_content.dart';
+
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
 import 'package:delivery_food/data/model/user.dart';
-import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/routes/route.dart';
-import 'package:delivery_food/unauthenticated/sign_up/fill_infor.dart';
+import 'package:delivery_food/unauthenticated/sign_in/login_page.dart';
+
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';
@@ -29,41 +28,19 @@ class _SignUpPageState extends State<SignUpScreen> {
   final usercontroller = TextEditingController();
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
-  String id = '';
-  @override
-  void initState() {
-    usercontroller.text = '';
-    emailcontroller.text = '';
-    passwordcontroller.text = '';
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    Future<String> buildCreateAccount(
-        String username, String pass, String email) async {
+    Future<bool> buildCreateAccount( String username,String pass, String email) async{
       if (pass != "" && username != "" && email != "") {
-        if (await userProvider.checkUsernameContain(username)) {
-          showDialog(
-              context: context,
-              builder: (context) => const AppAlert(
-                  title: 'Error', subtile: 'This account has already existed'));
-          initState();
-          return '';
-        } else {
-          User user = User(username: username, password: pass, email: email);
-          await userProvider.addUser(user).then((value) => Navigator.push(context, CustomPageRoute(child: FillInfor(id: userProvider.user.id!,))));
-         
-          return user.id!;
+        if(await userProvider.checkUsernameContain(username)){
+          return false;
         }
+        User user = User(username: username, password: pass, email: email);
+        userProvider.addUser(user);
+        return true;
       }
-      showDialog(
-          context: context,
-          builder: (context) => const AppAlert(
-              title: 'Error',
-              subtile: 'Please fill in all the required fields.'));
-      return '';
+      return false;
     }
 
     return Scaffold(
@@ -141,7 +118,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                   Row(
                     children: [
                       const CustomCheckbox(),
-                      Padding(
+                      Padding(  
                         padding: const EdgeInsets.only(left: 12),
                         child: Text(
                           'Email Me About Special Pricing',
@@ -158,12 +135,23 @@ class _SignUpPageState extends State<SignUpScreen> {
                         children: [
                           ReusableCard(
                               cardChild: CTAButton(
-                                  onTap: (){
-                                    buildCreateAccount(
+                                  onTap: ()async {
+                                    await buildCreateAccount(
                                             usercontroller.text,
                                             passwordcontroller.text,
-                                            emailcontroller.text);
-                                        
+                                            emailcontroller.text)
+                                        ? Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const LoginPage()))
+                                        : showDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                const AlertDialog(
+                                                  content: Text(
+                                                      'Your account already exists or is not valid'),
+                                                ));
                                   },
                                   label: 'Create Account')),
                           const SizedBox(

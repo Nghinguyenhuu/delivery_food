@@ -33,7 +33,7 @@ class UserService {
         return user;
       }
     }
-    return  User();
+    return const User();
   }
 
   Future<String> addUser(User user) async {

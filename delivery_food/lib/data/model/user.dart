@@ -2,13 +2,13 @@ class User {
   final String? id;
   final String? username;
   final String? password;
-  String? email;
-  String? firstname;
-  String? lastname;
-  String? mobilephone;
-  String? image;
+  final String? email;
+  final String? firstname;
+  final String? lastname;
+  final String? mobilephone;
+  final String? image;
 
-  User(
+  const User(
       {this.id,
       this.password,
       this.username,
