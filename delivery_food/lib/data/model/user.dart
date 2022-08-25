@@ -2,7 +2,6 @@ class User {
   final String? id;
   final String? username;
   final String? password;
-<<<<<<< HEAD
   String? email;
   String? firstname;
   String? lastname;
@@ -10,14 +9,6 @@ class User {
   String? image;
 
   User(
-=======
-  final String? email;
-  final String? firstname;
-  final String? lastname;
-  final String? mobilephone;
-  final String? photoUrl;
-  const User(
->>>>>>> origin/nghia_dev_feature_chat
       {this.id,
       this.password,
       this.username,
@@ -25,11 +16,7 @@ class User {
       this.firstname,
       this.lastname,
       this.mobilephone,
-<<<<<<< HEAD
       this.image});
-=======
-      this.photoUrl});
->>>>>>> origin/nghia_dev_feature_chat
 
   factory User.fromJson(String id, Map<String, dynamic> json) {
     return User(
@@ -40,8 +27,7 @@ class User {
         mobilephone: json["mobilephone"],
         image: json["image"],
         username: json["username"],
-        password: json["password"],
-        photoUrl: json["photoUrl"]);
+        password: json["password"]);
   }
 
   Map<String, dynamic> toJson() {
@@ -52,11 +38,7 @@ class User {
       "mobilephone": mobilephone,
       "username": username,
       "password": password,
-<<<<<<< HEAD
       "image": image
-=======
-      "photoUrl": photoUrl
->>>>>>> origin/nghia_dev_feature_chat
     };
   }
 }

@@ -21,19 +21,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-<<<<<<< HEAD
   int currentIndex = 0;
 
-=======
-  
- int currentIndex = 0;
->>>>>>> origin/nghia_dev_feature_chat
   final List<Widget> screen = [
     const Home(),
     const Profile(),
     const Buy(),
     const Chat()
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
