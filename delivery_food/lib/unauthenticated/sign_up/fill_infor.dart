@@ -11,7 +11,10 @@ import 'payment_method.dart';
 
 class FillInfor extends StatelessWidget {
   final String id;
-  const FillInfor({Key? key, required this.id,}) : super(key: key);
+  const FillInfor({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +24,25 @@ class FillInfor extends StatelessWidget {
 
     final userProvider = Provider.of<UserProvider>(context);
 
-    Future<bool> buildUpdateInfo(String? firstname,String lastname,String mobilenumber ) async{
-      if(firstname!='' ||lastname!='' ||mobilenumber!=''){
-        User user =await userProvider.getUser(id);
+    Future<bool> buildUpdateInfo(
+        String firstname, String lastname, String mobilenumber) async {
+          print(id);
+      if (firstname != '' || lastname != '' || mobilenumber != '') {
+        User user = await userProvider.getUser(id);
+        print(user.id);
         user.firstname = firstname;
-        userProvider.updateUser(user);
-        return true;
-      }else{
-        const AppAlert(title: 'Error', subtile: 'Please fill in all the required fields.',);
+        user.lastname = lastname;
+        user.mobilephone = mobilenumber;
+        return await userProvider.updateUser(user);
+      } else {
+        const AppAlert(
+          title: 'Error',
+          subtile: 'Please fill in all the required fields.',
+        );
       }
-      return false ;
+      return false;
     }
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
@@ -40,10 +51,16 @@ class FillInfor extends StatelessWidget {
         subtile:
             'This data will be displayed in your account profile for security',
         buttontext: 'Next',
-        onPress: ()async {
-          await buildUpdateInfo(firstnamecontroller.text,lastnamecontroller.text,mobilenumbercontroller.text) 
-          ? Navigator.push(context, CustomPageRoute(child: const PaymentMethod()))
-          : null;
+        onPress: () {
+          buildUpdateInfo(firstnamecontroller.text, lastnamecontroller.text,
+                  mobilenumbercontroller.text)
+              .then((value) => value
+                  ? Navigator.push(
+                      context, CustomPageRoute(child: PaymentMethod()))
+                  : showDialog(
+                      context: context,
+                      builder: (context) =>
+                          AppAlert(title: 'Error', subtile: 'Cant update')));
         },
         child: FormFill(
           firstname: firstnamecontroller,
@@ -53,6 +70,4 @@ class FillInfor extends StatelessWidget {
       ),
     );
   }
-  
-  
 }

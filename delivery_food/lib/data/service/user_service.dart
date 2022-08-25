@@ -24,29 +24,38 @@ class UserService {
       }
     });
 
-    return  allUser;
+    return allUser;
   }
 
   Future<User> getUser(String id) async {
-    for (User user in allUser) {
-      if (user.id == id) {
-        return user;
+    _init();
+    // print(id);
+    User user = User();
+    await db.collection("users").get().then((event) {
+      for (var doc in event.docs) {
+        if(doc.id==id){
+            user= User.fromJson(doc.id, doc.data());
+        }
+        // allUser.add(User.fromJson(doc.id, doc.data()));
+
+        // print("${doc.id} => ${doc.data()}");
       }
-    }
-    return  User();
+    });
+    // print(user.id);
+    return user;
   }
 
   Future<String> addUser(User user) async {
     String id = "";
-    db
+    await db
         .collection("users")
         .add(user.toJson())
         .then((DocumentReference doc) => id = doc.id);
-
+    print("id in sercice $id");
     return id;
   }
 
-  Future<bool> checkUserName(String userName)async{
+  Future<bool> checkUserName(String userName) async {
     for (var user in allUser) {
       if (user.username == userName) {
         return true;
@@ -55,7 +64,7 @@ class UserService {
     return false;
   }
 
-  Future updateUser(User user) async {
+  Future<bool> updateUser(User user) async {
     try {
       await db.collection("users").doc(user.id).update(user.toJson());
       return true;
