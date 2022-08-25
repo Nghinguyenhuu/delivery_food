@@ -1,26 +1,29 @@
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/components/vertify_content.dart';
+import 'package:delivery_food/unauthenticated/sign_in/reset_password.dart';
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 
-import '../sign_in/forgot_password.dart';
+
 
 class VertificationCode extends StatelessWidget {
   final String id;
-  const VertificationCode({Key? key, required this.id}) : super(key: key);
+  final String phonenumber;
+  const VertificationCode({Key? key, required this.id, required this.phonenumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SignupProcess(
+        isskip: false,
           title: 'Enter 4-digit Verification code',
           subtile:
-              'Code send to +84774111**** . This code will expired in 01:30',
+              'Code send to $phonenumber . This code will expired in 01:30',
           buttontext: 'Next',
           onPress: () {
-            Navigator.push(context, MaterialPageRoute(builder: ((context) =>const ForgotPassword(sms: '01212541078', email: 'hunh2880@gmail.com') )));
+            Navigator.push(context, MaterialPageRoute(builder: ((context) => ResetPassword(id:id,) )));
           },
-          skipButton: () {  },
+          skipButton: () {},
           child: Stack(
             children: [
               ReusableCard(

@@ -6,10 +6,11 @@ import '../service/user_service.dart';
 abstract class UserReposirory{
   Future<List<User>> getAllUser();
   Future<User> getUser(String id);
-  Future<String> checkUser(String username, String passwork);
+  Future<bool> checkUser(String username, String passwork);
   Future<String> addUser(User user);
   Future<bool> updateUser(User user);
   Future<bool> checkUserName(String username);
+  Future<User> getUserByName(String username);
 
 }
 
@@ -21,7 +22,7 @@ class UserReposiroryImpl implements UserReposirory{
   }
 
   @override
-  Future<String> checkUser(String username, String passwork) async{
+  Future<bool> checkUser(String username, String passwork) async{
     return await userService.checkUser(username, passwork);
   }
 
@@ -45,6 +46,13 @@ class UserReposiroryImpl implements UserReposirory{
   Future<bool> checkUserName(String username)async{
     bool isContains = await userService.checkUserName(username);
     return isContains;
+  }
+  
+  @override
+  Future<User> getUserByName(String username)async {
+  
+   User user = await userService.getUserByName(username);
+   return user;
   }
 
 }

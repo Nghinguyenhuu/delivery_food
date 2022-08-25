@@ -44,15 +44,27 @@ class UserService {
     // print(user.id);
     return user;
   }
-
+  
   Future<String> addUser(User user) async {
     String id = "";
     await db
         .collection("users")
         .add(user.toJson())
         .then((DocumentReference doc) => id = doc.id);
-    print("id in sercice $id");
+   
     return id;
+  }
+  Future<User> getUserByName(String userName) async {
+    _init();
+    
+    User user = User();
+    for (var element in allUser) {
+      if(element.username == userName ){
+        print('$userName ');
+        user = element;
+      }
+    }
+    return user;
   }
 
   Future<bool> checkUserName(String userName) async {
@@ -73,13 +85,13 @@ class UserService {
     }
   }
 
-  Future<String> checkUser(String username, String passwork) async {
+  Future<bool> checkUser(String username, String passwork) async {
     await _init();
     for (var user in allUser) {
       if (user.username == username && user.password == passwork) {
-        return user.id!;
+        return true;
       }
     }
-    return "";
+    return false;
   }
 }

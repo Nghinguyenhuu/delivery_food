@@ -13,9 +13,10 @@ class SignupProcess extends StatelessWidget {
   final String subtile;
   final Widget child; 
   final String buttontext;
+  final bool isskip ;
   final Function() onPress;
   final Function() skipButton;
-  const SignupProcess({Key? key, required this.title, required this.subtile, required this.child, required this.buttontext, required this.onPress,required this.skipButton}) : super(key: key);
+  const SignupProcess({Key? key, required this.title, required this.subtile, required this.child, required this.buttontext, required this.onPress,required this.skipButton, this.isskip = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class SignupProcess extends StatelessWidget {
                           child: LeadingButton(onPress: () {
                             Navigator.pop(context);
                           })),
-                      SkipButton(onPress: skipButton)
+                      isskip? SkipButton(onPress: skipButton):Container()
                     ],
                   ),
                 ),

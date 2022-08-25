@@ -1,5 +1,6 @@
 import 'package:delivery_food/components/location.dart';
 import 'package:delivery_food/routes/fade_route.dart';
+import 'package:delivery_food/unauthenticated/sign_up/signup_success.dart';
 
 
 
@@ -26,8 +27,8 @@ class _SetLocationState extends State<SetLocation> {
           subtile:
               'This data will be displayed in your account profile for security',
           buttontext: 'Next',
-          onPress: () {Navigator.push(context, CustomPageRoute(child: VertificationCode(id: widget.id,)));},
-          skipButton: () { Navigator.push(context, CustomPageRoute(child: VertificationCode(id: widget.id,)));},
+          onPress: () {Navigator.push(context, CustomPageRoute(child:const SignupSuccess()));},
+          skipButton: () { Navigator.push(context, CustomPageRoute(child: const SignupSuccess()));},
           child: Location(onPress: (){},)),
     );
   }

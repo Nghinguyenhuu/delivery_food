@@ -24,27 +24,19 @@ class UserProvider extends ChangeNotifier {
     _listUser = await userRepository.getAllUser();
     notifyListeners();
 
-    // notifyListeners();
   }
 
-  Future<bool> checkUser(String userName, String passwork) async {
-    await _init();
-    for (var user in _listUser) {
-      if (user.username == userName && user.password == passwork) {
-        _user = user;
-        notifyListeners();
-        return true;
-      }
-    }
+  Future<bool> checkUser(String userName, String password) async {
+    _init();
+    bool isSuccess = await userRepository.checkUser(userName,password);
     notifyListeners();
-    return false;
+    return isSuccess;
   }
 
   Future<User> getUser(String id)async{
     _init();
-    print(id);
+
     User user =await userRepository.getUser(id);
-    print("provider ${user.id}");
     notifyListeners();
     return user ;
   }
@@ -71,5 +63,16 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
     
     return isContains ;
+  }
+  Future<User> getUserByName(String userName)async{
+    await _init();
+    bool isContains = await userRepository.checkUserName(userName);
+    notifyListeners();
+    if (isContains){
+      return await userRepository.getUserByName(userName);
+    }else{
+      return User();
+    }
+    
   }
 }
