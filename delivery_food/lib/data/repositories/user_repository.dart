@@ -5,15 +5,16 @@ abstract class UserReposirory{
   Future<List<User>> getAllUser();
   Future<User> getUser(String id);
   Future<String> checkUser(String username, String passwork);
-  Future addUser(User user);
-  Future<User> updateUser(User user);
+  Future<String> addUser(User user);
+  Future<bool> updateUser(User user);
   Future<bool> checkUserName(String username);
+
 }
 
 class UserReposiroryImpl implements UserReposirory{
   static UserService userService = UserService();
   @override
-  Future addUser(User user) async {
+  Future<String> addUser(User user) async {
    return userService.addUser(user);
   }
 
@@ -33,9 +34,9 @@ class UserReposiroryImpl implements UserReposirory{
   }
   
   @override
-  Future<User> updateUser(User user) async{
-   await  userService.updateUser(user);
-   return user;
+  Future<bool> updateUser(User user) async{
+   bool isSuccess = await userService.updateUser(user);
+   return isSuccess;
   }
   
   @override
