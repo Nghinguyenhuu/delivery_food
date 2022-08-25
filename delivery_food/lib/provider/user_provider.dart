@@ -42,7 +42,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<User> getUser(String id)async{
     _init();
-    print(id);
+    // print(id);
     User user =await userRepository.getUser(id);
     print("provider ${user.id}");
     notifyListeners();
