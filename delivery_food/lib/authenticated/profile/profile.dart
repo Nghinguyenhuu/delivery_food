@@ -87,7 +87,7 @@ class Profile extends StatelessWidget {
     );
   }
 
-  Widget buildFavoriteFood(Menu menu) {
+  Widget buildFavoriteFood(Dish menu) {
     return ReusableCard(
         cardChild: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),

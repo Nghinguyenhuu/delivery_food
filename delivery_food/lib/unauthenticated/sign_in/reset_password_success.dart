@@ -13,7 +13,7 @@ class ResetPWSuccess extends StatelessWidget {
         extendBodyBehindAppBar: true,
         body: Pattern(
             child: SuccessNotification(
-              onPress: (){Navigator.push(context, CustomPageRoute(child: LoginPage()));},
+              onPress: (){Navigator.push(context, CustomPageRoute(child:const LoginPage()));},
                 label: 'Password reset succesful', buttontext: 'Back')));
   }
 }

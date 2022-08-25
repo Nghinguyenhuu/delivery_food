@@ -1,5 +1,4 @@
 import 'package:delivery_food/constans/app_stype.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 

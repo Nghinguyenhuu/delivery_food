@@ -53,8 +53,6 @@ class _SignUpPageState extends State<SignUpScreen> {
         } else {
           User user = User(username: username, password: pass, email: email);
           String id = await userProvider.addUser(user);
-          print("id in signup ${id}");
-          
           return id ;
         }
       }

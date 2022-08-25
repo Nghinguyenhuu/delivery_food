@@ -60,7 +60,6 @@ class UserService {
     User user = User();
     for (var element in allUser) {
       if(element.username == userName ){
-        print('$userName ');
         user = element;
       }
     }

@@ -1,4 +1,4 @@
-import 'package:delivery_food/routes/fade_route.dart';
+
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:delivery_food/widget/skip.dart';
 import 'package:flutter/material.dart';

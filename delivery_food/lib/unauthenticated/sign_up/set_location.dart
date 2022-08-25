@@ -7,7 +7,6 @@ import 'package:delivery_food/unauthenticated/sign_up/signup_success.dart';
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 
-import 'vertification_code.dart';
 
 
 class SetLocation extends StatefulWidget {
