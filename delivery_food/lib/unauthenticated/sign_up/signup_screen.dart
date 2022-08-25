@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+import 'package:delivery_food/components/app_alert_dialog.dart';
+>>>>>>> parent of d497ec4 (fix update info)
 import 'package:delivery_food/components/custom_checkbox.dart';
 import 'package:delivery_food/components/input_content.dart';
 
@@ -33,8 +38,23 @@ class _SignUpPageState extends State<SignUpScreen> {
     final userProvider = Provider.of<UserProvider>(context);
     Future<bool> buildCreateAccount( String username,String pass, String email) async{
       if (pass != "" && username != "" && email != "") {
+<<<<<<< HEAD
         if(await userProvider.checkUsernameContain(username)){
           return false;
+=======
+        if (await userProvider.checkUsernameContain(username)) {
+          showDialog(
+              context: context,
+              builder: (context) => const AppAlert(
+                  title: 'Error', subtile: 'This account has already existed'));
+          initState();
+          return '';
+        } else {
+          User user = User(username: username, password: pass, email: email);
+          await userProvider.addUser(user).then((value) => Navigator.push(context, CustomPageRoute(child: FillInfor(id: userProvider.user.id!,))));
+         
+          return user.id!;
+>>>>>>> parent of d497ec4 (fix update info)
         }
         User user = User(username: username, password: pass, email: email);
         userProvider.addUser(user);
@@ -135,6 +155,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                         children: [
                           ReusableCard(
                               cardChild: CTAButton(
+<<<<<<< HEAD
                                   onTap: ()async {
                                     await buildCreateAccount(
                                             usercontroller.text,
@@ -152,6 +173,14 @@ class _SignUpPageState extends State<SignUpScreen> {
                                                   content: Text(
                                                       'Your account already exists or is not valid'),
                                                 ));
+=======
+                                  onTap: (){
+                                    buildCreateAccount(
+                                            usercontroller.text,
+                                            passwordcontroller.text,
+                                            emailcontroller.text);
+                                        
+>>>>>>> parent of d497ec4 (fix update info)
                                   },
                                   label: 'Create Account')),
                           const SizedBox(

@@ -40,6 +40,15 @@ class UserProvider extends ChangeNotifier {
     return false;
   }
 
+<<<<<<< HEAD
+=======
+  Future<User> getUser(String id)async{
+    _init;
+    User user =await userRepository.getUser(id);
+    notifyListeners();
+    return user ;
+  }
+>>>>>>> parent of d497ec4 (fix update info)
 
   Future addUser(User user) async {
     await userRepository.addUser(user);
@@ -55,6 +64,10 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<bool> checkUsernameContain(String userName)async{
+<<<<<<< HEAD
+=======
+    _init();
+>>>>>>> parent of d497ec4 (fix update info)
     bool isContains = await userRepository.checkUserName(userName);
     notifyListeners();
     return isContains ;

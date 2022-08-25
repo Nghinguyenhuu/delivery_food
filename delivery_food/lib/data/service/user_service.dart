@@ -33,7 +33,11 @@ class UserService {
         return user;
       }
     }
+<<<<<<< HEAD
     return const User();
+=======
+    return  User();
+>>>>>>> parent of d497ec4 (fix update info)
   }
 
   Future<String> addUser(User user) async {
