@@ -5,12 +5,14 @@ import 'package:delivery_food/components/reusable_card.dart';
 
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
+import 'package:delivery_food/data/model/restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class RestaurantDetail extends StatefulWidget {
   final bool isRestaurant;
-  const RestaurantDetail({Key? key, required this.isRestaurant}) : super(key: key);
+  final Restaurant restaurant;
+  const RestaurantDetail({Key? key, required this.isRestaurant, required this.restaurant}) : super(key: key);
 
   @override
   State<RestaurantDetail> createState() => _RestaurantDetailState();

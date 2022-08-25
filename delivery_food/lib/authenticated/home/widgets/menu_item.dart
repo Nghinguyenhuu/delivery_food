@@ -17,20 +17,23 @@ class HomeMenuItem extends StatelessWidget {
                 Navigator.push(
                     context,
                     CustomPageRoute(
-                        child: const RestaurantDetail(
-                      isRestaurant: true,
+                        child:RestaurantDetail(
+                      isRestaurant: true, restaurant: restaurant,
                     )));
               },
               child: SizedBox(
                 height: 300,
+                width: MediaQuery.of(context).size.width * 0.4,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(restaurant.assetImage),
+                    const SizedBox(height: 10,),
                      Text(
                       restaurant.name,
                       style: kHomeSubjectStyle,
                     ),
+                    
                     Text(
                       '${restaurant.deliveryTime} mins',
                       style: kHintInputStyle,

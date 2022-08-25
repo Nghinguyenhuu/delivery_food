@@ -10,7 +10,6 @@ import '../../constans/app_colors.dart';
 
 class MenuDetail extends StatelessWidget {
   const MenuDetail({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

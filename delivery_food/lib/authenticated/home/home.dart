@@ -1,3 +1,4 @@
+import 'package:delivery_food/authenticated/details/menu_detail.dart';
 import 'package:delivery_food/authenticated/details/restaurant_detail.dart';
 import 'package:delivery_food/authenticated/home/widgets/menu_item.dart';
 import 'package:delivery_food/authenticated/screens/filter_screen.dart';
@@ -171,25 +172,30 @@ class _HomeState extends State<Home> {
       SliverList(
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
           return ReusableCard(
-              cardChild: ListTile(
-            leading: Container(
-              height: 64,
-              width: 64,
-              decoration: BoxDecoration(
-                  image: const DecorationImage(
-                      image: AssetImage('assets/images/MenuPhoto.png'),
-                      fit: BoxFit.cover),
-                  borderRadius: BorderRadius.circular(10.0)),
-            ),
-            title: const Text(
-              'Herbal Pancake',
-              style: kHomeSubjectStyle,
-            ),
-            subtitle: Text(
-              'Warung Herbal',
-              style: kHintInputStyle,
-            ),
-          ));
+              cardChild: GestureDetector(
+                onTap: (){Navigator.push(context, CustomPageRoute(child:MenuDetail() ));},
+                child: ListTile(
+                          leading: Container(
+                height: 64,
+                width: 64,
+                decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        image: AssetImage('assets/images/MenuPhoto.png'),
+                        fit: BoxFit.cover),
+                    borderRadius: BorderRadius.circular(10.0)),
+                          ),
+                          trailing: Text('\$ ${menus[index].price}',style:const TextStyle(color: AppColors.gold,fontSize: 20,fontFamily: 'BentonSans Bold') ,),
+                          title: const Text(
+                'Herbal Pancake',
+                style: kHomeSubjectStyle,
+                          ),
+                          subtitle: Text(
+                'Warung Herbal',
+                style: kHintInputStyle,
+                          ),
+                          
+                        ),
+              ));
         }, childCount: 3),
       )
     ]);
@@ -252,8 +258,8 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                     context,
                     CustomPageRoute(
-                        child: const RestaurantDetail(
-                      isRestaurant: true,
+                        child: RestaurantDetail(
+                      isRestaurant: true, restaurant: restaurants[index],
                     )));
               },
               child: SizedBox(
@@ -261,13 +267,14 @@ class _HomeState extends State<Home> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/Logo.png'),
-                    const Text(
-                      'Vegan Resto',
+                    Image.asset(restaurants[index].assetImage),
+                    Text(
+                      restaurants[index].name,
                       style: kHomeSubjectStyle,
                     ),
                     Text(
-                      '12 Mins',
+                      
+                      '${restaurants[index].deliveryTime} mins',
                       style: kHintInputStyle,
                     )
                   ],
