@@ -1,5 +1,5 @@
 import 'package:delivery_food/authenticated/screens/chat.dart';
-import 'package:delivery_food/authenticated/screens/home.dart';
+import 'package:delivery_food/authenticated/home/home.dart';
 import 'package:delivery_food/authenticated/buy/buy.dart';
 import 'package:delivery_food/components/home_bottom_item.dart';
 import 'package:delivery_food/data/model/user.dart';
@@ -57,9 +57,12 @@ class _HomeScreenState extends State<HomeScreen> {
               items: [
                 BottomNavigationBarItem(
                     icon: Image.asset('assets/icons/Home.png'),
-                    activeIcon: const HomeBottomItem(
+                    activeIcon: HomeBottomItem(
                       assetImage: 'assets/icons/Home.png',
                       label: 'Home',
+                      onPress: (){setState(() {
+                        currentIndex = 1;
+                      });},
                     ),
                     label: 'Home'),
                 BottomNavigationBarItem(
