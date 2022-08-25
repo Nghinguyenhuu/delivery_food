@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import '../sign_in/forgot_password.dart';
 
 class VertificationCode extends StatelessWidget {
-  const VertificationCode({Key? key}) : super(key: key);
+  final String id;
+  const VertificationCode({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class VertificationCode extends StatelessWidget {
           onPress: () {
             Navigator.push(context, MaterialPageRoute(builder: ((context) =>const ForgotPassword(sms: '01212541078', email: 'hunh2880@gmail.com') )));
           },
+          skipButton: () {  },
           child: Stack(
             children: [
               ReusableCard(

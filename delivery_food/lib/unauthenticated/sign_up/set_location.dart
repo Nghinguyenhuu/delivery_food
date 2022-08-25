@@ -1,4 +1,5 @@
 import 'package:delivery_food/components/location.dart';
+import 'package:delivery_food/routes/fade_route.dart';
 
 
 
@@ -9,7 +10,8 @@ import 'vertification_code.dart';
 
 
 class SetLocation extends StatefulWidget {
-  const SetLocation({Key? key}) : super(key: key);
+  final String id;
+  const SetLocation({Key? key, required this.id}) : super(key: key);
 
   @override
   State<SetLocation> createState() => _SetLocationState();
@@ -24,7 +26,8 @@ class _SetLocationState extends State<SetLocation> {
           subtile:
               'This data will be displayed in your account profile for security',
           buttontext: 'Next',
-          onPress: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> const VertificationCode()));},
+          onPress: () {Navigator.push(context, CustomPageRoute(child: VertificationCode(id: widget.id,)));},
+          skipButton: () { Navigator.push(context, CustomPageRoute(child: VertificationCode(id: widget.id,)));},
           child: Location(onPress: (){},)),
     );
   }

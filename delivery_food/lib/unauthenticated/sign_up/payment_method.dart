@@ -1,4 +1,5 @@
 import 'package:delivery_food/components/payment_content.dart';
+import 'package:delivery_food/routes/fade_route.dart';
 
 
 
@@ -9,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'upload_photo.dart';
 
 class PaymentMethod extends StatelessWidget {
-  const PaymentMethod({Key? key}) : super(key: key);
+  final String id;
+  const PaymentMethod({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,8 @@ class PaymentMethod extends StatelessWidget {
               subtile:
                   'This data will be displayed in your account profile for security',
               buttontext: 'Next',
-              onPress: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>const UploadPhoto()));},
+              onPress: () {Navigator.push(context, CustomPageRoute(child: UploadPhoto(id: id,)));},
+              skipButton: () { Navigator.push(context, CustomPageRoute(child: UploadPhoto(id: id,) )); },
               child: Column(children: [
                 PaymentContent(onTap: () {}, asset: 'assets/images/paypal.png'),
                 PaymentContent(onTap: () {}, asset: 'assets/images/visa.png'),

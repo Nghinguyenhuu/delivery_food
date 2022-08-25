@@ -27,6 +27,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           onPress: () {
             Navigator.push(context, MaterialPageRoute(builder: (context)=> const ResetPWSuccess()));
           },
+          skipButton: () {  },
           child: Form(
               child: Column(
             children:const [

@@ -28,6 +28,7 @@ class ForgotPassword extends StatelessWidget {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ResetPassword()));
           },
+          skipButton: () {  },
           child: Column(
             children: [
               ReusableCard(

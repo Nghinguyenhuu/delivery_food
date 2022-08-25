@@ -1,4 +1,6 @@
+import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/widget/pattern.dart';
+import 'package:delivery_food/widget/skip.dart';
 import 'package:flutter/material.dart';
 
 
@@ -12,7 +14,8 @@ class SignupProcess extends StatelessWidget {
   final Widget child; 
   final String buttontext;
   final Function() onPress;
-  const SignupProcess({Key? key, required this.title, required this.subtile, required this.child, required this.buttontext, required this.onPress}) : super(key: key);
+  final Function() skipButton;
+  const SignupProcess({Key? key, required this.title, required this.subtile, required this.child, required this.buttontext, required this.onPress,required this.skipButton}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,17 @@ class SignupProcess extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),
-                  child: SizedBox(
-                      width: 45,
-                      child: LeadingButton(onPress: () {
-                        Navigator.pop(context);
-                      })),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [                
+                      SizedBox(
+                          width: 45,
+                          child: LeadingButton(onPress: () {
+                            Navigator.pop(context);
+                          })),
+                      SkipButton(onPress: skipButton)
+                    ],
+                  ),
                 ),
                  Text(
                   title,

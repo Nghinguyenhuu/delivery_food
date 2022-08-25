@@ -26,10 +26,9 @@ class FillInfor extends StatelessWidget {
 
     Future<bool> buildUpdateInfo(
         String firstname, String lastname, String mobilenumber) async {
-          print(id);
+
       if (firstname != '' || lastname != '' || mobilenumber != '') {
         User user = await userProvider.getUser(id);
-        print(user.id);
         user.firstname = firstname;
         user.lastname = lastname;
         user.mobilephone = mobilenumber;
@@ -56,12 +55,13 @@ class FillInfor extends StatelessWidget {
                   mobilenumbercontroller.text)
               .then((value) => value
                   ? Navigator.push(
-                      context, CustomPageRoute(child: PaymentMethod()))
+                      context, CustomPageRoute(child: PaymentMethod(id:id,)))
                   : showDialog(
                       context: context,
                       builder: (context) =>
-                          AppAlert(title: 'Error', subtile: 'Cant update')));
+                          const AppAlert(title: 'Error', subtile: 'Cant update')));
         },
+        skipButton: () {  },
         child: FormFill(
           firstname: firstnamecontroller,
           lastname: lastnamecontroller,
