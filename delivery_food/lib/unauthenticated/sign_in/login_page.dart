@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     final userProvider = Provider.of<UserProvider>(context);
 
     _buildLogin(String user, String password) async {
-      if (await userProvider.getUser(user, password)) {
+      if (await userProvider.checkUser(user, password)) {
         User userAuth = userProvider.user;
         Navigator.pushNamed(context, RouteGenerator.home, arguments: userAuth);
       }

@@ -8,6 +8,7 @@ abstract class UserReposirory{
   Future addUser(User user);
   Future<User> updateUser(User user);
   Future<bool> checkUserName(String username);
+
 }
 
 class UserReposiroryImpl implements UserReposirory{

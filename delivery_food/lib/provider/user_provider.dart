@@ -5,7 +5,7 @@ import '../data/model/user.dart';
 
 class UserProvider extends ChangeNotifier {
   List<User> _listUser = [];
-  User _user = const User();
+  User _user =  User();
   UserReposirory userRepository = UserReposiroryImpl();
 
   List<User> get listUser {
@@ -27,7 +27,7 @@ class UserProvider extends ChangeNotifier {
     // notifyListeners();
   }
 
-  Future<bool> getUser(String userName, String passwork) async {
+  Future<bool> checkUser(String userName, String passwork) async {
     await _init();
     for (var user in _listUser) {
       if (user.username == userName && user.password == passwork) {
@@ -40,6 +40,12 @@ class UserProvider extends ChangeNotifier {
     return false;
   }
 
+  Future<User> getUser(String id)async{
+    _init;
+    User user =await userRepository.getUser(id);
+    notifyListeners();
+    return user ;
+  }
 
   Future addUser(User user) async {
     await userRepository.addUser(user);
@@ -55,6 +61,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<bool> checkUsernameContain(String userName)async{
+    _init();
     bool isContains = await userRepository.checkUserName(userName);
     notifyListeners();
     return isContains ;
