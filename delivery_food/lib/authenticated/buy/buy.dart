@@ -1,8 +1,10 @@
+import 'package:delivery_food/authenticated/buy/comfirm_order.dart';
 import 'package:delivery_food/authenticated/buy/widget/total.dart';
 import 'package:delivery_food/authenticated/buy/widget/trailing_buy_item.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
+import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/widget/leading_button.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
@@ -116,7 +118,9 @@ class _BuyState extends State<Buy> {
                 itemCount: 3,
               ),
             ),
-             Total(subtotal: calSubTotal(numProduct, [35,35,35]),deliverycharge: 10,discount: 20,),
+             Total(subtotal: calSubTotal(numProduct, [35,35,35]),deliverycharge: 10,discount: 20,onPress: (){
+              Navigator.push(context,CustomPageRoute(child: ConfirmOrder(total:Total(subtotal: calSubTotal(numProduct, [35,35,35]),deliverycharge: 10,discount: 20,)) ));
+             },),
           ],
         ))));
   }

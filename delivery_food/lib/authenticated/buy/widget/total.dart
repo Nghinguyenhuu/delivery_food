@@ -8,7 +8,8 @@ class Total extends StatelessWidget {
   final int subtotal;
   final int deliverycharge;
   final int discount;
-  const Total({Key? key, required this.subtotal, required this.discount, required this.deliverycharge}) : super(key: key);
+  final Function()? onPress; 
+  const Total({Key? key, required this.subtotal, required this.discount, required this.deliverycharge, this.onPress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,18 +42,21 @@ class Total extends StatelessWidget {
                 size: 18,
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.075,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
-              child: Center(
-                child: GradientText('Place My Order',
-                    colors: const [
-                      AppColors.appLinerColorStart,
-                      AppColors.appLinerColorEnd
-                    ],
-                    style: const TextStyle(
-                        fontFamily: 'BentonSans Bold', fontSize: 16)),
+            GestureDetector(
+              onTap: onPress,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.075,
+                decoration: BoxDecoration(
+                    color: Colors.white, borderRadius: BorderRadius.circular(15)),
+                child: Center(
+                  child: GradientText('Place My Order',
+                      colors: const [
+                        AppColors.appLinerColorStart,
+                        AppColors.appLinerColorEnd
+                      ],
+                      style: const TextStyle(
+                          fontFamily: 'BentonSans Bold', fontSize: 16)),
+                ),
               ),
             )
           ],

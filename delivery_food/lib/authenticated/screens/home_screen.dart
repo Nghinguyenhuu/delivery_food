@@ -7,7 +7,7 @@ import 'package:delivery_food/routes/fade_route.dart';
 
 import 'package:flutter/material.dart';
 
-import 'profile.dart';
+import '../profile/profile.dart';
 
 class HomeScreen extends StatefulWidget {
   final User users;
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBodyBehindAppBar: true,
-      body: screen[currentIndex],
+      body: SafeArea(child: screen[currentIndex]),
       bottomNavigationBar: buildBottom(),
     );
   }
