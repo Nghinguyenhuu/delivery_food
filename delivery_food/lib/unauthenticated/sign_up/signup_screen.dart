@@ -1,3 +1,4 @@
+
 import 'package:delivery_food/components/app_alert_dialog.dart';
 import 'package:delivery_food/components/custom_checkbox.dart';
 import 'package:delivery_food/components/input_content.dart';
@@ -52,10 +53,9 @@ class _SignUpPageState extends State<SignUpScreen> {
           return '';
         } else {
           User user = User(username: username, password: pass, email: email);
-          String id = await userProvider.addUser(user);
-          print("id in signup ${id}");
-          
-          return id ;
+          await userProvider.addUser(user).then((value) => Navigator.push(context, CustomPageRoute(child: FillInfor(id: userProvider.user.id!,))));
+         
+          return user.id!;
         }
       }
       showDialog(
@@ -158,19 +158,12 @@ class _SignUpPageState extends State<SignUpScreen> {
                         children: [
                           ReusableCard(
                               cardChild: CTAButton(
-                                  onTap: () {
+                                  onTap: (){
                                     buildCreateAccount(
                                             usercontroller.text,
                                             passwordcontroller.text,
-                                            emailcontroller.text)
-                                        .then((value) {
-                                      Navigator.push(
-                                          context,
-                                          CustomPageRoute(
-                                              child: FillInfor(
-                                            id: value,
-                                          )));
-                                    });
+                                            emailcontroller.text);
+                                        
                                   },
                                   label: 'Create Account')),
                           const SizedBox(

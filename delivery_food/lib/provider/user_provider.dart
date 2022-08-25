@@ -18,7 +18,7 @@ class UserProvider extends ChangeNotifier {
 
   UserProvider() {
     _init();
-    notifyListeners();
+    // notifyListeners();
   }
   _init() async {
     _listUser = await userRepository.getAllUser();
@@ -41,35 +41,29 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<User> getUser(String id)async{
-    _init();
-    print(id);
+    _init;
     User user =await userRepository.getUser(id);
-    print("provider ${user.id}");
     notifyListeners();
     return user ;
   }
 
-  Future<String> addUser(User user) async {
-    String id = await userRepository.addUser(user);
-
+  Future addUser(User user) async {
+    await userRepository.addUser(user);
     _init();
     notifyListeners();
-    return id;
   }
 
-  Future<bool> updateUser(User user) async {
-    bool isSuccess = await userRepository.updateUser(user);
+  Future updateUser(User user) async {
+    userRepository.updateUser(user);
     _user = user;
     _init();
     notifyListeners();
-    return isSuccess;
   }
 
   Future<bool> checkUsernameContain(String userName)async{
-    await _init();
+    _init();
     bool isContains = await userRepository.checkUserName(userName);
     notifyListeners();
-    
     return isContains ;
   }
 }
