@@ -24,14 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   
  int currentIndex = 0;
-  final List<Widget> screen = [
+  
+  @override
+  Widget build(BuildContext context) {
+    final List<Widget> screen = [
     const Home(),
-    const Profile(),
+    Profile(user: widget.users,),
     const Buy(),
     const Chat()
   ];
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBodyBehindAppBar: true,

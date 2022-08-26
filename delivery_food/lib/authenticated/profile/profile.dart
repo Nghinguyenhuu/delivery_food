@@ -1,3 +1,4 @@
+import 'package:delivery_food/authenticated/profile/edit_profile.dart';
 import 'package:delivery_food/authenticated/profile/widgets/buy_again.dart';
 import 'package:delivery_food/authenticated/profile/widgets/nametag.dart';
 import 'package:delivery_food/authenticated/profile/widgets/rankmember.dart';
@@ -7,12 +8,15 @@ import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
 import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/data/model/menu.dart';
+import 'package:delivery_food/data/model/user.dart';
+import 'package:delivery_food/routes/fade_route.dart';
 
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  final User user;
+  const Profile({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +66,7 @@ class Profile extends StatelessWidget {
                 Nametag(
                   email: 'hungnm@gmail.com',
                   name: 'Anam Wusono',
-                  onPressed: () {},
+                  onPressed: () {Navigator.push(context, CustomPageRoute(child: EditProfile(user:user,)));},
                 ),
                 const Voucher(),
                 const Padding(
