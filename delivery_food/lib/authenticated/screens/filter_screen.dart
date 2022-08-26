@@ -1,5 +1,8 @@
 import 'package:delivery_food/components/filter_tag.dart';
 import 'package:delivery_food/components/reusable_home_card.dart';
+import 'package:delivery_food/data/data_source/home_data.dart';
+import 'package:delivery_food/data/model/menu.dart';
+import 'package:delivery_food/data/model/restaurant.dart';
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +23,18 @@ class FilterScreen extends StatefulWidget {
 class _FilterScreenState extends State<FilterScreen> {
   @override
   Widget build(BuildContext context) {
+    List<Restaurant> restaurants = allRestaurant;
+    List<Dish> menu = allMenu;
+    List<String> typefood=[];
+    for (var i = 0; i < menu.length; i++) {
+      if(typefood.contains(menu[i].food)){ 
+      }else{
+        typefood.add(menu[i].food);
+      }
+    }
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false ,
       body: SafeArea(
           child: Pattern(
         child: Stack(
@@ -71,8 +85,9 @@ class _FilterScreenState extends State<FilterScreen> {
                     )
                   ],
                 )),
+                const SizedBox(height: 20,),
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     'Type',
                     style: kHomeSubjectStyle,
@@ -86,33 +101,37 @@ class _FilterScreenState extends State<FilterScreen> {
                   ],
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    'Type',
+                    'Location',
                     style: kHomeSubjectStyle,
                   ),
                 ),
                 Wrap(
                   spacing: 20,
                   children: const [
-                    FilterTag(tagName: 'Restaurant'),
-                    FilterTag(tagName: 'Menu'),
+                    FilterTag(tagName: '1 Km'),
+                    FilterTag(tagName: '<10 Km'),
+                    FilterTag(tagName: '>10 Km')
                   ],
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(vertical:10),
                   child: Text(
-                    'Type',
+                    'Food',
                     style: kHomeSubjectStyle,
                   ),
                 ),
                 Wrap(
                   spacing: 20,
                   children: const [
-                    FilterTag(tagName: 'Restaurant'),
-                    FilterTag(tagName: 'Menu'),
+                    FilterTag(tagName: 'Cake'),
+                    FilterTag(tagName: 'Soup'),
+                    FilterTag(tagName: 'MainCourse'),
+                    FilterTag(tagName: 'Appetizer'),
+                    FilterTag(tagName: 'Dessert'),
                   ],
-                )
+                ),
               ],
             ),
             Align(
@@ -126,4 +145,5 @@ class _FilterScreenState extends State<FilterScreen> {
       )),
     );
   }
+  
 }

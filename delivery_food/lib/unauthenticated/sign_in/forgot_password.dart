@@ -1,33 +1,38 @@
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
+import 'package:delivery_food/routes/fade_route.dart';
+import 'package:delivery_food/unauthenticated/sign_up/vertification_code.dart';
 
 import 'package:delivery_food/widget/signup_process.dart';
 import 'package:flutter/material.dart';
 
 import '../../constans/app_stype.dart';
-import 'reset_password.dart';
+
 
 
 
 
 class ForgotPassword extends StatelessWidget {
+  final String id;
   final String sms;
   final String email;
-  const ForgotPassword({Key? key, required this.sms, required this.email})
+  const ForgotPassword({Key? key, required this.sms, required this.email, required this.id})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SignupProcess(
+        isskip: false,
           title: 'Forgot password?',
           subtile:
               'Select which contact details should we use to reset your password',
           buttontext: 'Next',
           onPress: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ResetPassword()));
+                CustomPageRoute(child: VertificationCode(id:id, phonenumber:changeObscureSMS(sms), )));
           },
+          skipButton: () {  },
           child: Column(
             children: [
               ReusableCard(

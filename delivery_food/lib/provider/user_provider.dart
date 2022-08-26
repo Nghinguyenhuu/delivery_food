@@ -1,17 +1,15 @@
-import 'package:delivery_food/data/model/chat/group_chat.dart';
 import 'package:delivery_food/data/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../data/model/user.dart';
 
 class UserProvider extends ChangeNotifier {
-  List<User> _ListUser = [];
-  User ornerUser = User();
-  User _user = User();
+  List<User> _listUser = [];
+  User _user =  User();
   UserReposirory userRepository = UserReposiroryImpl();
 
   List<User> get listUser {
-    return _ListUser;
+    return _listUser;
   }
 
   User get user {
@@ -20,64 +18,61 @@ class UserProvider extends ChangeNotifier {
 
   UserProvider() {
     _init();
+    notifyListeners();
   }
-
   _init() async {
-    _ListUser.clear();
-    _ListUser = await userRepository.getAllUser();
+    _listUser = await userRepository.getAllUser();
     notifyListeners();
+
   }
 
-  Future<bool> getUser(String userName, String passwork) async {
-    // await _init();
-    for (var user in _ListUser) {
-      if (user.username == userName && user.password == passwork) {
-        _user = user;
-        notifyListeners();
-        return true;
-      }
-    }
+  Future<bool> checkUser(String userName, String password) async {
+    _init();
+    bool isSuccess = await userRepository.checkUser(userName,password);
     notifyListeners();
-    return false;
+    return isSuccess;
   }
 
-  Future addUser(User user) async {
-    await userRepository.addUser(user);
-    _ListUser.add(user);
+  Future<User> getUser(String id)async{
+    _init();
+
+    User user =await userRepository.getUser(id);
+    notifyListeners();
+    return user ;
+  }
+
+  Future<String> addUser(User user) async {
+    String id = await userRepository.addUser(user);
+
     _init();
     notifyListeners();
+    return id;
   }
 
-  Future updateUser(User user) async {
-    userRepository.updateUser(user);
+  Future<bool> updateUser(User user) async {
+    bool isSuccess = await userRepository.updateUser(user);
     _user = user;
     _init();
     notifyListeners();
+    return isSuccess;
   }
 
-  Future<User> findUser(String id) async {
+  Future<bool> checkUsernameContain(String userName)async{
     await _init();
-    for (var user in _ListUser) {
-      if (user.id == id) {
-        notifyListeners();
-        return user;
-      }
-    }
+    bool isContains = await userRepository.checkUserName(userName);
     notifyListeners();
-    return User();
+    
+    return isContains ;
   }
-
-  Future logoutUser() async {
-    _user = User();
+  Future<User> getUserByName(String userName)async{
+    await _init();
+    bool isContains = await userRepository.checkUserName(userName);
     notifyListeners();
-  }
-
-  User findOeruser(String id) {
-    for (var user in _ListUser) {
-      if (user.id == id) {
-        return user;
-      }
+    if (isContains){
+      return await userRepository.getUserByName(userName);
+    }else{
+      return User();
     }
-    return User();
+    
   }
 }

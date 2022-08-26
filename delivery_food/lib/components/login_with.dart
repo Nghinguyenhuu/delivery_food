@@ -1,9 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:simple_gradient_text/simple_gradient_text.dart';
-
-import '../constans/app_colors.dart';
 import '../constans/app_stype.dart';
 import 'reusable_card.dart';
 
@@ -50,15 +47,7 @@ class ContinueWith extends StatelessWidget {
                     )),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: GradientText('Forgot Your Password',
-                      style: kMidiumStyle,
-                      colors: const [
-                        AppColors.appLinerColorStart,
-                        AppColors.appLinerColorEnd
-                      ]),
-                )
+                
       ],
     );
   }

@@ -1,15 +1,12 @@
-import 'package:delivery_food/constans/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class TrailingBuyItem extends StatefulWidget {
-  const TrailingBuyItem({Key? key}) : super(key: key);
+import '../../../constans/app_colors.dart';
 
-  @override
-  State<TrailingBuyItem> createState() => _TrailingBuyItemState();
-}
+class TrailingBuyItem extends StatelessWidget {
+  final int count;
+  final Function(int) onChange;
+  const TrailingBuyItem({Key? key, required this.count, required this.onChange}) : super(key: key);
 
-class _TrailingBuyItemState extends State<TrailingBuyItem> {
-  int value = 1;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,13 +14,7 @@ class _TrailingBuyItemState extends State<TrailingBuyItem> {
       child: Row(
         children: [
           IconButton(
-              onPressed: () {
-                setState(() {
-                  if (value != 0) {
-                    value--;
-                  }
-                });
-              },
+              onPressed: ()=> onChange(-1),
               icon: Container(
                 width: 26,
                 height: 26,
@@ -34,14 +25,10 @@ class _TrailingBuyItemState extends State<TrailingBuyItem> {
                     child:const Icon(Icons.remove,color: AppColors.appLinerColorEnd,size: 16,),
               )),
           Text(
-            '$value',
+            '${count < 0 ? 0 : count}',
           ),
           IconButton(
-              onPressed: () {
-                setState(() {
-                  value++;
-                });
-              },
+              onPressed:() => onChange(1),
               icon: Container(
                 width: 26,
                 height: 26,

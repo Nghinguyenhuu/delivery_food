@@ -1,8 +1,6 @@
 import 'package:delivery_food/constans/app_colors.dart';
-import 'package:delivery_food/provider/user_provider.dart';
 import 'package:delivery_food/routes/route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../widget/cta_button.dart';
 
 class OnBoardingScreen2 extends StatelessWidget {

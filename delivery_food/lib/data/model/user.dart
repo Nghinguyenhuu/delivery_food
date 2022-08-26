@@ -1,13 +1,14 @@
 class User {
   final String? id;
   final String? username;
-  final String? password;
-  final String? email;
-  final String? firstname;
-  final String? lastname;
-  final String? mobilephone;
-  final String? photoUrl;
-  const User(
+   String? password;
+  String? email;
+  String? firstname;
+  String? lastname;
+  String? mobilephone;
+  String? image;
+
+  User(
       {this.id,
       this.password,
       this.username,
@@ -15,7 +16,7 @@ class User {
       this.firstname,
       this.lastname,
       this.mobilephone,
-      this.photoUrl});
+      this.image});
 
   factory User.fromJson(String id, Map<String, dynamic> json) {
     return User(
@@ -24,9 +25,9 @@ class User {
         lastname: json["lastname"],
         email: json["email"],
         mobilephone: json["mobilephone"],
+        image: json["image"],
         username: json["username"],
-        password: json["password"],
-        photoUrl: json["photoUrl"]);
+        password: json["password"]);
   }
 
   Map<String, dynamic> toJson() {
@@ -37,7 +38,7 @@ class User {
       "mobilephone": mobilephone,
       "username": username,
       "password": password,
-      "photoUrl": photoUrl
+      "image": image
     };
   }
 }

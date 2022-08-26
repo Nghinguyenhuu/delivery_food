@@ -16,35 +16,54 @@ class UserService {
   }
 
   Future<List<User>> getAllUser() async {
-    List<User> list = [];
     await db.collection("users").get().then((event) {
       for (var doc in event.docs) {
-        list.add(User.fromJson(doc.id, doc.data()));
-        print("${doc.id} => ${doc.data()}");
+        allUser.add(User.fromJson(doc.id, doc.data()));
+
+        // print("${doc.id} => ${doc.data()}");
       }
     });
-    allUser.clear();
-    allUser.addAll(list);
+
     return allUser;
   }
 
   Future<User> getUser(String id) async {
-    for (User user in allUser) {
-      if (user.id == id) {
-        return user;
-      }
-    }
-    return User();
-  }
+    _init();
+    // print(id);
+    User user = User();
+    await db.collection("users").get().then((event) {
+      for (var doc in event.docs) {
+        if(doc.id==id){
+            user= User.fromJson(doc.id, doc.data());
+        }
+        // allUser.add(User.fromJson(doc.id, doc.data()));
 
+        // print("${doc.id} => ${doc.data()}");
+      }
+    });
+    // print(user.id);
+    return user;
+  }
+  
   Future<String> addUser(User user) async {
     String id = "";
-    db
+    await db
         .collection("users")
         .add(user.toJson())
         .then((DocumentReference doc) => id = doc.id);
-
+   
     return id;
+  }
+  Future<User> getUserByName(String userName) async {
+    _init();
+    
+    User user = User();
+    for (var element in allUser) {
+      if(element.username == userName ){
+        user = element;
+      }
+    }
+    return user;
   }
 
   Future<bool> checkUserName(String userName) async {
@@ -56,7 +75,7 @@ class UserService {
     return false;
   }
 
-  Future updateUser(User user) async {
+  Future<bool> updateUser(User user) async {
     try {
       await db.collection("users").doc(user.id).update(user.toJson());
       return true;
@@ -65,13 +84,13 @@ class UserService {
     }
   }
 
-  Future<String> checkUser(String username, String passwork) async {
+  Future<bool> checkUser(String username, String passwork) async {
     await _init();
     for (var user in allUser) {
       if (user.username == username && user.password == passwork) {
-        return user.id!;
+        return true;
       }
     }
-    return "";
+    return false;
   }
 }

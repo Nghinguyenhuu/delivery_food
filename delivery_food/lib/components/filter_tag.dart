@@ -8,21 +8,24 @@ class FilterTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReusableHomeCard(
-        child: TextButton(
-            onPressed: () {},
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18,vertical: 12),
-              child: Text(
-                tagName,
-                style: const TextStyle(
-                    fontFamily: 'BentonSans Bold',
-                    fontWeight: FontWeight.w100,
-                    fontSize: 14,
-                    
-                    letterSpacing: 0.7,
-                    color: AppColors.orange),
-              ),
-            )));
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: ReusableHomeCard(
+          child: TextButton(
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18,vertical: 10),
+                child: Text(
+                  tagName,
+                  style: const TextStyle(
+                      fontFamily: 'BentonSans Bold',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 14,
+                      
+                      letterSpacing: 0.7,
+                      color: AppColors.orange),
+                ),
+              ))),
+    );
   }
 }

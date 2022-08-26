@@ -8,15 +8,16 @@ import 'package:flutter/material.dart';
 class HomeBottomItem extends StatelessWidget {
   final String assetImage;
   final String label;
+  final Function()? onPress;
 
-  const HomeBottomItem({Key? key, required this.assetImage, required this.label,}) : super(key: key);
+  const HomeBottomItem({Key? key, required this.assetImage, required this.label, this.onPress,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:const EdgeInsets.symmetric(horizontal: 8),
       child: GestureDetector(
-        onTap:(){},
+        onTap:onPress,
         child: Container(
           height: 45,
           decoration: BoxDecoration(

@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/delivery_food/linux"
+    "cmake.sourceDirectory": "${workspaceFolder}/delivery_food/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
