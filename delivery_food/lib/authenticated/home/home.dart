@@ -1,12 +1,13 @@
 import 'package:delivery_food/authenticated/details/menu_detail.dart';
 import 'package:delivery_food/authenticated/details/restaurant_detail.dart';
 import 'package:delivery_food/authenticated/home/widgets/menu_item.dart';
-import 'package:delivery_food/authenticated/screens/filter_screen.dart';
+import 'package:delivery_food/authenticated/home/filter_screen.dart';
 import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/data/model/restaurant.dart';
 import 'package:delivery_food/routes/fade_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../../components/reusable_card.dart';
@@ -31,10 +32,30 @@ class _HomeState extends State<Home> {
   int menuviewmore = 3;
   List<Restaurant> restaurants = allRestaurant;
   List<Dish> menus = allMenu;
+  List<String> listFilter = [];
   bool isMenuViewmore = false;
   bool ispromo = true;
+  void buildFiltertag()async{
+    final pref =await SharedPreferences.getInstance();
+    if(pref.getBool('Restaurant') != null){
+      if(pref.getBool('Menu')==null){
+        menus.clear();
+      }
+    }else if(pref.getBool('Menu') != null){
+      restaurants.clear();
+    }
+    List<int> location = [];
+    for (var element in restaurants) {
+      if(pref.getBool('${element.deliveryTime}')!= null){
+        location.add(element.deliveryTime);
+      }
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Pattern(
         child: CustomScrollView(
@@ -174,30 +195,42 @@ class _HomeState extends State<Home> {
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
           return ReusableCard(
               cardChild: GestureDetector(
-                onTap: (){Navigator.push(context, CustomPageRoute(child:MenuDetail(dish: menus[index],) ));},
-                child: ListTile(
-                          leading: Container(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  CustomPageRoute(
+                      child: MenuDetail(
+                    dish: menus[index],
+                  )));
+            },
+            child: ListTile(
+              leading: Container(
                 height: 64,
                 width: 64,
                 decoration: BoxDecoration(
-                    image:  DecorationImage(
+                    image: DecorationImage(
                         image: AssetImage(menus[index].assetImage),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10.0)),
-                          ),
-                          trailing: Text('\$ ${menus[index].price}',style:const TextStyle(color: AppColors.gold,fontSize: 20,fontFamily: 'BentonSans Bold') ,),
-                          title: Text(
+              ),
+              trailing: Text(
+                '\$ ${menus[index].price}',
+                style: const TextStyle(
+                    color: AppColors.gold,
+                    fontSize: 20,
+                    fontFamily: 'BentonSans Bold'),
+              ),
+              title: Text(
                 menus[index].name,
                 style: kHomeSubjectStyle,
-                          ),
-                          subtitle: Text(
+              ),
+              subtitle: Text(
                 menus[index].ofRestaurant,
                 style: kHintInputStyle,
-                          ),
-                          
-                        ),
-              ));
-        }, childCount:menus.length),
+              ),
+            ),
+          ));
+        }, childCount: menus.length),
       )
     ]);
   }
@@ -220,9 +253,9 @@ class _HomeState extends State<Home> {
                   setState(() {
                     ispromo = false;
                     isMenuViewmore = true;
-                    if((restaurantCount + 4) > restaurants.length ){
-                      restaurantCount =restaurants.length;
-                    }else{
+                    if ((restaurantCount + 4) > restaurants.length) {
+                      restaurantCount = restaurants.length;
+                    } else {
                       restaurantCount += 4;
                     }
                   });
@@ -236,136 +269,146 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      !isMenuViewmore ? SliverToBoxAdapter(
-        child: 
-        SizedBox(
-          height: MediaQuery.of(context).size.height*0.25,
-          child: ListView.builder(scrollDirection: Axis.horizontal,itemBuilder: (context,index){
-            return Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: HomeMenuItem(restaurant: allRestaurant[index],onPress:  () {
-                Navigator.push(
-                    context,
-                    CustomPageRoute(
-                        child:RestaurantDetail(
-                      isRestaurant: true, restaurant:allRestaurant[index],
-                    )));
-              },),
-            );
-          },
-          itemCount:restaurants.length,
-          ),
-        ),
-      )
-      :SliverGrid(
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return ReusableCard(
-                cardChild: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    CustomPageRoute(
-                        child: RestaurantDetail(
-                      isRestaurant: true, restaurant: restaurants[index],
-                    )));
-              },
+      !isMenuViewmore
+          ? SliverToBoxAdapter(
               child: SizedBox(
-                height: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(restaurants[index].assetImage),
-                    Text(
-                      restaurants[index].name,
-                      style: kHomeSubjectStyle,
-                    ),
-                    Text(
-                      
-                      '${restaurants[index].deliveryTime} mins',
-                      style: kHintInputStyle,
-                    )
-                  ],
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: HomeMenuItem(
+                        restaurant: allRestaurant[index],
+                        onPress: () {
+                          Navigator.push(
+                              context,
+                              CustomPageRoute(
+                                  child: RestaurantDetail(
+                                isRestaurant: true,
+                                restaurant: allRestaurant[index],
+                              )));
+                        },
+                      ),
+                    );
+                  },
+                  itemCount: restaurants.length,
                 ),
               ),
-            ));
-          }, childCount:restaurants.length),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20)),
+            )
+          : SliverGrid(
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+                return ReusableCard(
+                    cardChild: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CustomPageRoute(
+                            child: RestaurantDetail(
+                          isRestaurant: true,
+                          restaurant: restaurants[index],
+                        )));
+                  },
+                  child: SizedBox(
+                    height: 300,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(restaurants[index].assetImage),
+                        Text(
+                          restaurants[index].name,
+                          style: kHomeSubjectStyle,
+                        ),
+                        Text(
+                          '${restaurants[index].deliveryTime} mins',
+                          style: kHintInputStyle,
+                        )
+                      ],
+                    ),
+                  ),
+                ));
+              }, childCount: restaurants.length),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20)),
     ]);
   }
-  buildPromo(){
+
+  buildPromo() {
     return MultiSliver(children: [
-      ispromo ? SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Container(
-            height: 150,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                image: const DecorationImage(
-                    image: AssetImage('assets/images/Promocard.png'),
-                    fit: BoxFit.cover),
-                gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      AppColors.appLinerColorStart,
-                      AppColors.appLinerColorEnd
-                    ])),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 100,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      width: 144,
-                      height: 44,
-                      child: Text(
-                        'Special Deal For October',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'BentonSans Bold',
-                            fontSize: 17),
+      ispromo
+          ? SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: const DecorationImage(
+                          image: AssetImage('assets/images/Promocard.png'),
+                          fit: BoxFit.cover),
+                      gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            AppColors.appLinerColorStart,
+                            AppColors.appLinerColorEnd
+                          ])),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        width: 100,
                       ),
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.white),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              child: GradientText('Buy Now', colors: const [
-                                AppColors.appLinerColorStart,
-                                AppColors.appLinerColorEnd
-                              ]),
-                            ))),
-                  ],
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            width: 144,
+                            height: 44,
+                            child: Text(
+                              'Special Deal For October',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'BentonSans Bold',
+                                  fontSize: 17),
+                            ),
+                          ),
+                          TextButton(
+                              onPressed: () {},
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Colors.white),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    child: GradientText('Buy Now',
+                                        colors: const [
+                                          AppColors.appLinerColorStart,
+                                          AppColors.appLinerColorEnd
+                                        ]),
+                                  ))),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ):const SliverToBoxAdapter(),
+              ),
+            )
+          : const SliverToBoxAdapter(),
     ]);
   }
 
   buildHomeView() {
     return MultiSliver(children: [
       buildPromo(),
-      restaurants.isNotEmpty ? buildViewMoreRestaurant():Container(),
-      menus.isNotEmpty ? buildViewmoreMenu() : Container()  
+      restaurants.isNotEmpty ? buildViewMoreRestaurant() : Container(),
+      menus.isNotEmpty ? buildViewmoreMenu() : Container()
     ]);
   }
 }

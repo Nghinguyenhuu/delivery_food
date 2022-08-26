@@ -8,6 +8,7 @@ import 'package:delivery_food/widget/pattern.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../components/reusable_card.dart';
 import '../../constans/app_colors.dart';
@@ -21,10 +22,12 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
+  
   @override
   Widget build(BuildContext context) {
     List<Restaurant> restaurants = allRestaurant;
     List<Dish> menu = allMenu;
+    List<String> listFilterTag = [];
     List<String> typefood=[];
     for (var i = 0; i < menu.length; i++) {
       if(typefood.contains(menu[i].food)){ 
@@ -85,7 +88,25 @@ class _FilterScreenState extends State<FilterScreen> {
                     )
                   ],
                 )),
-                const SizedBox(height: 20,),
+                buildFilter()
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CTAButton(onTap: (){
+                Navigator.pop(context);
+              }, label: 'Search',weight: double.infinity,height: 60,),
+            )
+                      ],
+        ),
+      )),
+    );
+  }
+  Widget buildFilter() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 20,),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
@@ -132,17 +153,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     FilterTag(tagName: 'Dessert'),
                   ],
                 ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: CTAButton(onTap: (){
-                Navigator.pop(context);
-              }, label: 'Search',weight: double.infinity,height: 60,),
-            )
-                      ],
-        ),
-      )),
+      ],
     );
   }
   

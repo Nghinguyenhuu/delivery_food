@@ -1,4 +1,4 @@
-import 'package:delivery_food/authenticated/screens/home_screen.dart';
+import 'package:delivery_food/authenticated/home/home_screen.dart';
 import 'package:delivery_food/data/model/user.dart';
 import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/unauthenticated/onboarding/onboarding.dart';

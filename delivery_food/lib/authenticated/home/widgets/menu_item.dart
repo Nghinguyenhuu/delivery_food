@@ -1,8 +1,8 @@
-import 'package:delivery_food/authenticated/details/restaurant_detail.dart';
+
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_stype.dart';
 import 'package:delivery_food/data/model/restaurant.dart';
-import 'package:delivery_food/routes/fade_route.dart';
+
 import 'package:flutter/material.dart';
 
 class HomeMenuItem extends StatelessWidget {

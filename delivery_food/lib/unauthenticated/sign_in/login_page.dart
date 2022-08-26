@@ -1,3 +1,5 @@
+import 'package:delivery_food/authenticated/home/home.dart';
+import 'package:delivery_food/authenticated/home/home_screen.dart';
 import 'package:delivery_food/components/app_alert_dialog.dart';
 import 'package:delivery_food/components/input_content.dart';
 import 'package:delivery_food/components/login_with.dart';
@@ -34,8 +36,8 @@ class _LoginPageState extends State<LoginPage> {
 
     _buildLogin(String user, String password) async {
       if (await userProvider.checkUser(user, password)) {
-        User userAuth = userProvider.user;
-        Navigator.pushNamed(context, RouteGenerator.home, arguments: userAuth);
+         await userProvider.getUserByName(user).then((value) => Navigator.push(context, CustomPageRoute(child: HomeScreen(users: value))));
+        
       } else {
         showDialog(
             context: context,

@@ -1,8 +1,10 @@
+import 'package:delivery_food/authenticated/details/menu_detail.dart';
 import 'package:delivery_food/authenticated/profile/edit_profile.dart';
 import 'package:delivery_food/authenticated/profile/widgets/buy_again.dart';
 import 'package:delivery_food/authenticated/profile/widgets/nametag.dart';
 import 'package:delivery_food/authenticated/profile/widgets/rankmember.dart';
 import 'package:delivery_food/authenticated/profile/widgets/voucher.dart';
+import 'package:delivery_food/components/app_alert_dialog.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
@@ -12,6 +14,7 @@ import 'package:delivery_food/data/model/user.dart';
 import 'package:delivery_food/routes/fade_route.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class Profile extends StatelessWidget {
@@ -21,6 +24,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final favoriteFood = allMenu;
+    String name = user.firstname! + user.lastname!;
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -64,9 +68,18 @@ class Profile extends StatelessWidget {
               children: [
                 const RankMember(),
                 Nametag(
-                  email: 'hungnm@gmail.com',
-                  name: 'Anam Wusono',
-                  onPressed: () {Navigator.push(context, CustomPageRoute(child: EditProfile(user:user,)));},
+                  email: user.email == null ? 'Unknown' : user.email!,
+                  name: user.firstname == null
+                      ? user.username!
+                      : '${user.firstname} ${user.lastname}',
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        CustomPageRoute(
+                            child: EditProfile(
+                          user: user,
+                        )));
+                  },
                 ),
                 const Voucher(),
                 const Padding(
@@ -84,18 +97,20 @@ class Profile extends StatelessWidget {
             delegate: SliverChildBuilderDelegate((context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: buildFavoriteFood(favoriteFood[index]),
+            child: GestureDetector(
+              onTap:()=> Navigator.push(context, CustomPageRoute(child:MenuDetail(dish: favoriteFood[index]) )),
+                child: buildFavoriteFood(favoriteFood[index], context)),
           );
         }, childCount: favoriteFood.length))
       ],
     );
   }
 
-  Widget buildFavoriteFood(Dish menu) {
+  Widget buildFavoriteFood(Dish menu, BuildContext context) {
     return ReusableCard(
-        cardChild: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: ListTile(
+      cardChild: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: ListTile(
             leading: Image.asset(menu.assetImage),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,12 +119,16 @@ class Profile extends StatelessWidget {
                   menu.name,
                   style: kHomeSubjectStyle,
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Text(
                   menu.ofRestaurant,
                   style: kHintInputStyle,
                 ),
-                const SizedBox(height:10 ,)
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
             subtitle: GradientText(
@@ -118,11 +137,14 @@ class Profile extends StatelessWidget {
                 AppColors.appLinerColorStart,
                 AppColors.appLinerColorEnd
               ],
-              style:const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            trailing: BuyAgain(onPressed: (){},)
-            ),
-          ),
-        );
+            trailing: BuyAgain(
+              onPressed: (){
+               
+              },
+            )),
+      ),
+    );
   }
 }
