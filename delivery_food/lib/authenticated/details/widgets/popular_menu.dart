@@ -2,7 +2,7 @@ import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
 import 'package:delivery_food/data/data_source/home_data.dart';
-import 'package:delivery_food/data/model/restaurant.dart';
+import 'package:delivery_food/data/model/menu.dart';
 import 'package:delivery_food/routes/fade_route.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -13,7 +13,7 @@ class PopularMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Restaurant> restaurants = allRestaurant;
+    List<Dish> menus = allMenu;
     return Column(
       children: [
         Padding(
@@ -45,19 +45,20 @@ class PopularMenu extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 20),
                 child: ReusableCard(
                     cardChild: GestureDetector(
-                      onTap: (){Navigator.push(context, CustomPageRoute(child: const MenuDetail()));},
+                      onTap: (){Navigator.push(context, CustomPageRoute(child: MenuDetail(dish: menus[index],)));},
                       child: SizedBox(
                                       width: MediaQuery.of(context).size.width * 0.35,
                                       child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(restaurants[index].assetImage),
+                        Image.asset(menus[index].assetImage),
+                        const SizedBox(height: 20,),
                         Text(
-                          restaurants[index].name,
+                          menus[index].name,
                           style: kHomeSubjectStyle,
                         ),
                         Text(
-                          '${restaurants[index].deliveryTime} mins',
+                          '${menus[index].price} \$',
                           style: kHintInputStyle,
                         )
                       ],
@@ -66,7 +67,7 @@ class PopularMenu extends StatelessWidget {
                     )),
               );
             },
-            itemCount: restaurants.length,
+            itemCount: menus.length,
           ),
         ),
       ],

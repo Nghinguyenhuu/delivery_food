@@ -5,6 +5,7 @@ import 'package:delivery_food/components/reusable_card.dart';
 
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
+import 'package:delivery_food/data/model/comment.dart';
 import 'package:delivery_food/data/model/restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -19,10 +20,12 @@ class RestaurantDetail extends StatefulWidget {
 }
 
 class _RestaurantDetailState extends State<RestaurantDetail> {
+  
   @override
   Widget build(BuildContext context) {
-
+    List<Comment> comments = widget.restaurant.comments;
     return Scaffold(
+      
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -101,8 +104,8 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                         height: 64,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/PhotoProfile.png'),
+                          image: DecorationImage(
+                            image: AssetImage(comments[index].image),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -113,12 +116,12 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Dianne Russell',
+                             Text(
+                                comments[index].name,
                                 style: kHomeSubjectStyle,
                               ),
                               Text(
-                                '12 April 2021',
+                                comments[index].date,
                                 style: kHintInputStyle,
                               )
                             ],
@@ -136,7 +139,7 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                                     width: 6,
                                   ),
                                   GradientText(
-                                    '5',
+                                    comments[index].start,
                                     colors: const [
                                       AppColors.appLinerColorStart,
                                       AppColors.appLinerColorEnd
@@ -151,10 +154,10 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                           )
                         ],
                       ),
-                      subtitle: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
+                      subtitle: Padding(
+                        padding:const EdgeInsets.symmetric(vertical: 20),
                         child: Text(
-                            'This Is great, So delicious! You Must Here, With Your family . . '),
+                            comments[index].description),
                       ),
                     ),
                   ),

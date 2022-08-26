@@ -5,12 +5,10 @@ import 'package:delivery_food/authenticated/screens/filter_screen.dart';
 import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/data/model/restaurant.dart';
 import 'package:delivery_food/routes/fade_route.dart';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-
 import '../../components/reusable_card.dart';
 import '../../components/reusable_home_card.dart';
 import '../../constans/app_colors.dart';
@@ -30,6 +28,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int restaurantCount = 4;
+  int menuviewmore = 3;
   List<Restaurant> restaurants = allRestaurant;
   List<Dish> menus = allMenu;
   bool isMenuViewmore = false;
@@ -127,8 +126,8 @@ class _HomeState extends State<Home> {
 
   void searchContent(String query) {
     final input = query.toLowerCase();
-    final suggestRestaurant = allRestaurant.where((restaurant) {
-      final restaurantName = restaurant.name.toLowerCase();
+    final suggestRestaurant = allRestaurant.where((element) {
+      final restaurantName = element.name.toLowerCase();
       return restaurantName.contains(input);
     }).toList();
     final suggestMenu = allMenu.where((element) {
@@ -138,6 +137,7 @@ class _HomeState extends State<Home> {
     setState(() {
       restaurants = suggestRestaurant;
       menus = suggestMenu;
+      ispromo = false;
     });
   }
 
@@ -157,7 +157,8 @@ class _HomeState extends State<Home> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    
+                    menuviewmore = menus.length;
+                    ispromo = false;
                   });
                 },
                 child: const Text(
@@ -173,30 +174,30 @@ class _HomeState extends State<Home> {
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
           return ReusableCard(
               cardChild: GestureDetector(
-                onTap: (){Navigator.push(context, CustomPageRoute(child:MenuDetail() ));},
+                onTap: (){Navigator.push(context, CustomPageRoute(child:MenuDetail(dish: menus[index],) ));},
                 child: ListTile(
                           leading: Container(
                 height: 64,
                 width: 64,
                 decoration: BoxDecoration(
-                    image: const DecorationImage(
-                        image: AssetImage('assets/images/MenuPhoto.png'),
+                    image:  DecorationImage(
+                        image: AssetImage(menus[index].assetImage),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10.0)),
                           ),
                           trailing: Text('\$ ${menus[index].price}',style:const TextStyle(color: AppColors.gold,fontSize: 20,fontFamily: 'BentonSans Bold') ,),
-                          title: const Text(
-                'Herbal Pancake',
+                          title: Text(
+                menus[index].name,
                 style: kHomeSubjectStyle,
                           ),
                           subtitle: Text(
-                'Warung Herbal',
+                menus[index].ofRestaurant,
                 style: kHintInputStyle,
                           ),
                           
                         ),
               ));
-        }, childCount: 3),
+        }, childCount:menus.length),
       )
     ]);
   }
@@ -242,10 +243,17 @@ class _HomeState extends State<Home> {
           child: ListView.builder(scrollDirection: Axis.horizontal,itemBuilder: (context,index){
             return Padding(
               padding: const EdgeInsets.only(right: 20),
-              child: HomeMenuItem(restaurant: allRestaurant[index]),
+              child: HomeMenuItem(restaurant: allRestaurant[index],onPress:  () {
+                Navigator.push(
+                    context,
+                    CustomPageRoute(
+                        child:RestaurantDetail(
+                      isRestaurant: true, restaurant:allRestaurant[index],
+                    )));
+              },),
             );
           },
-          itemCount:allRestaurant.length,
+          itemCount:restaurants.length,
           ),
         ),
       )
@@ -281,7 +289,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ));
-          }, childCount:restaurantCount),
+          }, childCount:restaurants.length),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.8,
@@ -356,8 +364,8 @@ class _HomeState extends State<Home> {
   buildHomeView() {
     return MultiSliver(children: [
       buildPromo(),
-      buildViewMoreRestaurant(),
-      buildViewmoreMenu()    
+      restaurants.isNotEmpty ? buildViewMoreRestaurant():Container(),
+      menus.isNotEmpty ? buildViewmoreMenu() : Container()  
     ]);
   }
 }

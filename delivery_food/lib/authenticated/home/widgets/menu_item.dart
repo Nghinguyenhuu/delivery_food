@@ -7,20 +7,14 @@ import 'package:flutter/material.dart';
 
 class HomeMenuItem extends StatelessWidget {
   final Restaurant restaurant;
-  const HomeMenuItem({Key? key, required this.restaurant, }) : super(key: key);
+  final Function() onPress;
+  const HomeMenuItem({Key? key, required this.restaurant, required this.onPress, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ReusableCard(
                 cardChild: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    CustomPageRoute(
-                        child:RestaurantDetail(
-                      isRestaurant: true, restaurant: restaurant,
-                    )));
-              },
+              onTap: onPress,
               child: SizedBox(
                 height: 300,
                 width: MediaQuery.of(context).size.width * 0.4,
