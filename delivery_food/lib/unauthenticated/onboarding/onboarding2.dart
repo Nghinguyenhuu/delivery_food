@@ -1,5 +1,7 @@
 import 'package:delivery_food/constans/app_colors.dart';
+import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/routes/route.dart';
+import 'package:delivery_food/unauthenticated/sign_in/login_page.dart';
 import 'package:flutter/material.dart';
 import '../../widget/cta_button.dart';
 
@@ -59,7 +61,7 @@ class OnBoardingScreen2 extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 40),
                   child: CTAButton(
                       onTap: () {
-                        Navigator.pushNamed(context, RouteGenerator.signup);
+                        Navigator.push(context, CustomPageRoute(child:const LoginPage()));
                       },
                       label: 'Next'),
                 ),

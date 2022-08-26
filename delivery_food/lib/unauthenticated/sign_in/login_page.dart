@@ -11,6 +11,7 @@ import 'package:delivery_food/provider/user_provider.dart';
 import 'package:delivery_food/routes/fade_route.dart';
 import 'package:delivery_food/routes/route.dart';
 import 'package:delivery_food/unauthenticated/sign_in/find_account.dart';
+import 'package:delivery_food/unauthenticated/sign_up/signup_screen.dart';
 import 'package:delivery_food/widget/cta_button.dart';
 import 'package:delivery_food/widget/logo.dart';
 import 'package:delivery_food/widget/pattern.dart';
@@ -89,17 +90,33 @@ class _LoginPageState extends State<LoginPage> {
                     const ContinueWith(),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context,
-                              CustomPageRoute(child: const FindAccount()));
-                        },
-                        child: GradientText('Forgot Your Password',
-                            style: kMidiumStyle,
-                            colors: const [
-                              AppColors.appLinerColorStart,
-                              AppColors.appLinerColorEnd
-                            ]),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  CustomPageRoute(child:const SignUpScreen()));
+                            },
+                            child: GradientText('Signup',
+                                style: kMidiumStyle,
+                                colors: const [
+                                  AppColors.appLinerColorStart,
+                                  AppColors.appLinerColorEnd
+                                ]),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  CustomPageRoute(child: const FindAccount()));
+                            },
+                            child: GradientText('Forgot Your Password',
+                                style: kMidiumStyle,
+                                colors: const [
+                                  AppColors.appLinerColorStart,
+                                  AppColors.appLinerColorEnd
+                                ]),
+                          ),
+                        ],
                       ),
                     ),
                     CTAButton(
