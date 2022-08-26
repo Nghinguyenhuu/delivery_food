@@ -35,8 +35,8 @@ class Profile extends StatelessWidget {
           elevation: 0,
           flexibleSpace: FlexibleSpaceBar(
             titlePadding: EdgeInsets.zero,
-            title: Image.asset(
-              'assets/images/PhotoProfile.png',
+            title: Image.network(
+              user.image!,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
