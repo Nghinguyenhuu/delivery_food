@@ -4,7 +4,6 @@ import 'package:delivery_food/authenticated/profile/widgets/buy_again.dart';
 import 'package:delivery_food/authenticated/profile/widgets/nametag.dart';
 import 'package:delivery_food/authenticated/profile/widgets/rankmember.dart';
 import 'package:delivery_food/authenticated/profile/widgets/voucher.dart';
-import 'package:delivery_food/components/app_alert_dialog.dart';
 import 'package:delivery_food/components/reusable_card.dart';
 import 'package:delivery_food/constans/app_colors.dart';
 import 'package:delivery_food/constans/app_stype.dart';
@@ -12,9 +11,7 @@ import 'package:delivery_food/data/data_source/home_data.dart';
 import 'package:delivery_food/data/model/menu.dart';
 import 'package:delivery_food/data/model/user.dart';
 import 'package:delivery_food/routes/fade_route.dart';
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class Profile extends StatelessWidget {
@@ -24,7 +21,6 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final favoriteFood = allMenu;
-    String name = user.firstname! + user.lastname!;
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -36,7 +32,7 @@ class Profile extends StatelessWidget {
           flexibleSpace: FlexibleSpaceBar(
             titlePadding: EdgeInsets.zero,
             title: Image.network(
-              user.image!,
+              user.image ?? 'https://firebasestorage.googleapis.com/v0/b/delivery-food-8a78a.appspot.com/o/image%2Fpost%2F1661509719468251?alt=media&token=f16034c5-e346-42bb-be9e-b6dd47e93701' ,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
