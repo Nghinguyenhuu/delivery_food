@@ -93,17 +93,18 @@ class _BuyState extends State<Buy> {
                                 children: [
                                   GestureDetector(
                                     onTap: () async {
+                                      listBuy.removeAt(index);
+                                      listNumProduc.removeAt(index);
                                       final prefs =
                                           await SharedPreferences.getInstance();
-                                      prefs.remove('${listBuy[index].id}');
+                                      prefs.remove('${listBuy[index].id}').then((value) {setState(() {
+                                        
+                                      });});
                                       showDialog(
                                           context: context,
                                           builder: (context) => const AppAlert(
                                               title: 'Success',
                                               subtile: 'Delete Item Success!'));
-                                      setState(() {
-                                        getItem();
-                                      });
                                     },
                                     child: Container(
                                       decoration: const BoxDecoration(
