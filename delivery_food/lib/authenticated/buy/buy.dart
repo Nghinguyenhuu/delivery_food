@@ -93,12 +93,11 @@ class _BuyState extends State<Buy> {
                                 children: [
                                   GestureDetector(
                                     onTap: () async {
-                                      listBuy.removeAt(index);
-                                      listNumProduc.removeAt(index);
                                       final prefs =
                                           await SharedPreferences.getInstance();
                                       prefs.remove('${listBuy[index].id}').then((value) {setState(() {
-                                        
+                                        listBuy.removeAt(index);
+                                        listNumProduc.removeAt(index);
                                       });});
                                       showDialog(
                                           context: context,
