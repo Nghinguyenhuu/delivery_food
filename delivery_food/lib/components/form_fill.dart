@@ -4,27 +4,30 @@ import 'package:flutter/material.dart';
 
 
 class FormFill extends StatelessWidget {
-  const FormFill({Key? key}) : super(key: key);
+  final TextEditingController firstname;
+  final TextEditingController lastname;
+  final TextEditingController mobilenumber;
+  const FormFill({Key? key, required this.firstname, required this.lastname, required this.mobilenumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Form(
         child: Column(
-      children: const [
+      children: [
         ReusableCard(
             cardChild: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: InputContent(label: 'First Name'),
+          padding:const EdgeInsets.all(8.0),
+          child: InputContent(label: 'First Name',myController: firstname,),
         )),
         ReusableCard(
             cardChild: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: InputContent(label: 'Last Name'),
+          padding:const EdgeInsets.all(8.0),
+          child: InputContent(label: 'Last Name',myController: lastname,),
         )),
         ReusableCard(
             cardChild: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: InputContent(label: 'Mobile Phone'),
+          padding:const EdgeInsets.all(8.0),
+          child: InputContent(label: 'Mobile Phone',myController: mobilenumber,),
         )),
       ],
     ));

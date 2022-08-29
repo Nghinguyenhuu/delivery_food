@@ -13,7 +13,7 @@ class Pattern extends StatelessWidget {
           image:
               DecorationImage(image: AssetImage('assets/images/Pattern.png'),fit: BoxFit.cover)),
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(25.0),
             child: child,
           )
     );

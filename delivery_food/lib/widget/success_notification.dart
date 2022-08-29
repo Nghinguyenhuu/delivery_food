@@ -11,7 +11,8 @@ import 'package:simple_gradient_text/simple_gradient_text.dart';
 class SuccessNotification extends StatefulWidget {
   final String label;
   final String buttontext;
-  const SuccessNotification({Key? key, required this.label, required this.buttontext}) : super(key: key);
+  final Function()? onPress;
+  const SuccessNotification({Key? key, required this.label, required this.buttontext, this.onPress}) : super(key: key);
 
   @override
   State<SuccessNotification> createState() => _SuccessNotificationState();
@@ -83,8 +84,7 @@ class _SuccessNotificationState extends State<SuccessNotification>
           child: Padding(
             padding: const EdgeInsets.all(40.0),
             child: CTAButton(
-                onTap: () {
-                },
+                onTap: widget.onPress!,
                 label: widget.buttontext),
           ),
         )
