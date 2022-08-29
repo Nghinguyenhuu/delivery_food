@@ -27,156 +27,172 @@ class _BuyState extends State<Buy> {
   List<Dish> listBuy = [];
   List<int> listNumProduc = [];
 
-  Future<void> getItem() async {
+  Future<List<Dish>> getItem() async {
     final prefs = await SharedPreferences.getInstance();
     listBuy.clear();
-    listNumProduc.clear();
     for (var element in menu) {
       bool isAdded = prefs.getBool('${element.id}') ?? false;
       if (isAdded) {
         listBuy.add(element);
-        listNumProduc.add(1);
       }
     }
+    return listBuy;
   }
 
   @override
   void initState() {
+    getItem().then((value){ 
+      for (var element in value) {
+        if(listNumProduc.length <= listBuy.length){
+          listNumProduc.add(1);
+        }
+      }
+    })
+    ;
+    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getItem(),
-      builder: (context, _) {
-      return Scaffold(
-          extendBodyBehindAppBar: true,
-          body: SafeArea(
-              child: Pattern(
-                  child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              LeadingButton(onPress: () {
-                Navigator.pop(context);
-              }),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Text(
-                  'Order details',
-                  style: kHeadingStyle,
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Slidable(
-                        endActionPane: ActionPane(
-                            extentRatio: 0.25,
-                            motion: const ScrollMotion(),
-                            children: [
-                              GestureDetector(
-                                onTap: ()async{
-                                  final prefs =await SharedPreferences.getInstance();
-                                  prefs.remove('${listBuy[index].id}');
-                                  showDialog(context: context, builder: (context)=>const AppAlert(title: 'Success', subtile: 'Delete Item Success!'));
-                                  setState(() {
-                                    getItem();
-                                  });
-                                },
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                      color: AppColors.orange,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(15),
-                                          bottomRight: Radius.circular(15))),
-                                  height: double.maxFinite,
-                                  width: 80,
-                                  child: const Center(
-                                    child: Icon(Icons.delete),
-                                  ),
-                                ),
-                              )
-                            ]),
-                        child: ReusableCard(
-                            padding: 0,
-                            cardChild: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: ListTile(
-                                  autofocus: true,
-                                  leading: Image.asset(
-                                    listBuy[index].assetImage,
-                                    width: 62,
-                                    height: 62,
-                                  ),
-                                  title: Text(
-                                    listBuy[index].name,
-                                    style: kSubTitleStyle,
-                                  ),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        listBuy[index].ofRestaurant,
-                                        style: kHintInputStyle,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      GradientText(
-                                        '\$ ${listBuy[index].price}',
-                                        colors: const [
-                                          AppColors.appLinerColorStart,
-                                          AppColors.appLinerColorEnd
-                                        ],
-                                        style: const TextStyle(
-                                            fontFamily: 'BentonSans Bold',
-                                            fontSize: 18),
-                                      )
-                                    ],
-                                  ),
-                                  trailing: TrailingBuyItem(
-                                    count: listNumProduc[index],
-                                    onChange: (int value) {
+        future: getItem(),
+        builder: (context, _) {
+          
+          return Scaffold(
+              extendBodyBehindAppBar: true,
+              body: SafeArea(
+                  child: Pattern(
+                      child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  LeadingButton(onPress: () {
+                    Navigator.pop(context);
+                  }),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Text(
+                      'Order details',
+                      style: kHeadingStyle,
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.45,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Slidable(
+                            endActionPane: ActionPane(
+                                extentRatio: 0.25,
+                                motion: const ScrollMotion(),
+                                children: [
+                                  GestureDetector(
+                                    onTap: () async {
+                                      final prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.remove('${listBuy[index].id}');
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => const AppAlert(
+                                              title: 'Success',
+                                              subtile: 'Delete Item Success!'));
                                       setState(() {
-                                        listNumProduc[index] += value;
+                                        getItem();
                                       });
                                     },
-                                  )),
-                            )),
-                      ),
-                    );
-                  },
-                  itemCount: listBuy.length,
-                ),
-              ),
-              Total(
-                subtotal: calSubTotal(listNumProduc, listBuy),
-                deliverycharge: 10,
-                discount: 20,
-                onPress: () {
-                  Navigator.push(
-                      context,
-                      CustomPageRoute(
-                          child: ConfirmOrder(
-                              total: Total(
-                        subtotal: calSubTotal(listNumProduc, listBuy),
-                        deliverycharge: 10,
-                        discount: 20,
-                      ))));
-                },
-              ),
-            ],
-          ))));
-    });
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                          color: AppColors.orange,
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(15),
+                                              bottomRight:
+                                                  Radius.circular(15))),
+                                      height: double.maxFinite,
+                                      width: 80,
+                                      child: const Center(
+                                        child: Icon(Icons.delete),
+                                      ),
+                                    ),
+                                  )
+                                ]),
+                            child: ReusableCard(
+                                padding: 0,
+                                cardChild: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  child: ListTile(
+                                      autofocus: true,
+                                      leading: Image.asset(
+                                        listBuy[index].assetImage,
+                                        width: 62,
+                                        height: 62,
+                                      ),
+                                      title: Text(
+                                        listBuy[index].name,
+                                        style: kSubTitleStyle,
+                                      ),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            listBuy[index].ofRestaurant,
+                                            style: kHintInputStyle,
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          GradientText(
+                                            '\$ ${listBuy[index].price}',
+                                            colors: const [
+                                              AppColors.appLinerColorStart,
+                                              AppColors.appLinerColorEnd
+                                            ],
+                                            style: const TextStyle(
+                                                fontFamily: 'BentonSans Bold',
+                                                fontSize: 18),
+                                          )
+                                        ],
+                                      ),
+                                      trailing: TrailingBuyItem(
+                                        count: listNumProduc[index],
+                                        onChange: (int value) {
+                                          setState(() {
+                                            listNumProduc[index] += value;
+                                          });
+                                        },
+                                      )),
+                                )),
+                          ),
+                        );
+                      },
+                      itemCount: listBuy.length,
+                    ),
+                  ),
+                  Total(
+                    subtotal: calSubTotal(listNumProduc, listBuy),
+                    deliverycharge: 10,
+                    discount: 20,
+                    onPress: () {
+                      Navigator.push(
+                          context,
+                          CustomPageRoute(
+                              child: ConfirmOrder(
+                                  total: Total(
+                            subtotal: calSubTotal(listNumProduc, listBuy),
+                            deliverycharge: 10,
+                            discount: 20,
+                          ))));
+                    },
+                  ),
+                ],
+              ))));
+        });
   }
 
   int calSubTotal(List<int> l1, List<Dish> l2) {
